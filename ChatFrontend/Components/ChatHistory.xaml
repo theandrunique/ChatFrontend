@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="ChatFrontend.Components.ChatHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChatFrontend.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="300">
+    <Grid Background="Gray">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <TextBox x:Name="HistoryWith" Grid.Column="0" Text="theandru" FontWeight="Bold" VerticalContentAlignment="Top"  Background="Transparent" IsEnabled="False" FontSize="14"/>
+                    <TextBox x:Name="IsNew" Grid.Column="1" Text="New" FontStyle="Italic" VerticalContentAlignment="Top" HorizontalAlignment="Right"  Background="Transparent" IsEnabled="False" FontSize="14"/>
+                </Grid>
+                <TextBox Grid.Row="1" x:Name="LastMessageText" Grid.Column="1" Text="Last message content" VerticalContentAlignment="Top"  Background="Transparent" IsEnabled="False" FontSize="16"/>
+            </Grid>
+            <Border VerticalAlignment="Center" Height="50" BorderThickness="1" Background="Crimson"></Border>
+        </Grid>
+    </Grid>
+</UserControl>

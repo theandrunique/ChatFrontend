@@ -20,9 +20,24 @@ namespace ChatFrontend.Components
     /// </summary>
     public partial class ChatHistory : UserControl
     {
-        public ChatHistory()
+        Classes.ChatHistory currentHistory;
+        public ChatHistory(Classes.ChatHistory history)
         {
+            currentHistory = history;
             InitializeComponent();
+            LoadContent();
+        }
+
+        void LoadContent()
+        {
+            HistoryWith.Text = currentHistory.HistoryWith;
+            LastMessageText.Text = currentHistory.LastMessage;
+            MakeAsNew(currentHistory.HasNew);
+        }
+        public void MakeAsNew(bool isNew)
+        {
+            if (isNew)
+                IsNew.Text = "New";
         }
     }
 }

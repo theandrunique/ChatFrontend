@@ -46,6 +46,9 @@ namespace ChatFrontend.Pages
         }
         private void signIn_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (!isButtonDown)
+                return;
+
             isButtonDown = false;
             if (isMouseOver)
                 signIn.Background = mouseOverColor;

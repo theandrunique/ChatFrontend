@@ -23,6 +23,11 @@ namespace ChatFrontend
         public MainWindow()
         {
             InitializeComponent();
+            OpenPage(new Pages.Auth());
+        }
+        public void OpenPage(Page page)
+        {
+            frame.Navigate(page);
         }
     }
 }

@@ -71,6 +71,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\ChatHistory.cs" />
+    <Compile Include="Classes\Message.cs" />
     <Compile Include="Components\ChatHistory.xaml.cs">
       <DependentUpon>ChatHistory.xaml</DependentUpon>
     </Compile>
@@ -112,7 +114,6 @@
     <Resource Include="Images\background.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\" />
     <Folder Include="Pages\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

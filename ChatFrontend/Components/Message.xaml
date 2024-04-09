@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="ChatFrontend.Components.Message"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChatFrontend.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300">
+    <Grid Background="Gray">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="MessageFrom" Grid.Column="0" Text="theandru" FontWeight="Bold" VerticalContentAlignment="Top"  Background="Transparent" IsEnabled="False" FontSize="14"/>
+                    <TextBox x:Name="MessageAt" Grid.Column="1" Text="05.05.05 05:05" FontStyle="Italic" VerticalContentAlignment="Top"  Background="Transparent" IsEnabled="False" FontSize="14"/>
+                </Grid>
+                <TextBox Grid.Row="1" x:Name="MessageText" Grid.Column="1" Text="Message text" VerticalContentAlignment="Top"  Background="Transparent" IsEnabled="False" FontSize="16"/>
+            </Grid>
+            <Border Height="50" VerticalAlignment="Top" BorderThickness="1" Background="Crimson"></Border>
+        </Grid>
+    </Grid>
+</UserControl>

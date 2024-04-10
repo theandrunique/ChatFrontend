@@ -28,25 +28,12 @@ namespace ChatFrontend.Pages
         }
         private void CreateForm()
         {
-            StackPanel stackPanelForm = new StackPanel();
-            stackPanelForm.Orientation = Orientation.Vertical;
-            stackPanelForm.Children.Add(FormBuilder.FormBuilder.CreateFormHeader(
-                "Register",
-                new Thickness(0, 0, 0, 20)
-                ));
-            var inputField = new FormBuilder.InputField();
-            inputField.AddPlaceholder("keklol");
-            stackPanelForm.Children.Add(inputField.Build());
+            var registerForm = new FormBuilder.Form();
+            registerForm.AddHeader("Register", new Thickness(0, 0, 0, 20));
+            registerForm.AddInputField("login");
+            registerForm.AddInputField("password");
 
-            var secondInputField = new FormBuilder.InputField();
-            secondInputField.AddPlaceholder("keklol123");
-            stackPanelForm.Children.Add(secondInputField.Build());
-
-            var passwordField =  new FormBuilder.PasswordField();
-            passwordField.AddPlaceholder("password");
-            stackPanelForm.Children.Add(passwordField.Build());
-
-            form.Children.Add(stackPanelForm);
+            form.Children.Add(registerForm.Build());
         }
         
 

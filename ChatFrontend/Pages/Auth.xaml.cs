@@ -37,8 +37,11 @@ namespace ChatFrontend.Pages
 
         private void SignIn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            isButtonDown = true;
-            signIn.Background = mouseDownColor;
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                isButtonDown = true;
+                signIn.Background = mouseDownColor;
+            }
         }
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
         {

@@ -45,7 +45,9 @@
                                  Style="{StaticResource PlaceholderTextBoxStyle}"
                                  Tag="login"
                                  FontFamily="Open Sans"
-                                 SelectionChanged="login_SelectionChanged"/>
+                                 SelectionChanged="login_SelectionChanged"
+                                 GotFocus="login_GotFocus"
+                                 LostFocus="login_LostFocus"/>
                     </Border>
                 </Grid>
                 <Grid Height="auto">
@@ -72,7 +74,9 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      FontFamily="Open Sans"
-                                     PasswordChanged="password_PasswordChanged"/>
+                                     PasswordChanged="password_PasswordChanged"
+                                     GotFocus="password_GotFocus"
+                                     LostFocus="password_LostFocus"/>
                     </Border>
                 </Grid>
                 <Grid>
@@ -98,7 +102,8 @@
                             MouseLeave="SignIn_MouseLeave"
                             MouseUp="SignIn_MouseUp"
                             Height="35">
-                        <TextBox FontSize="18"
+                        <TextBox x:Name="signInText"
+                                 FontSize="18"
                                  BorderThickness="0"
                                  Tag="Password"
                                  Text="Sign in"

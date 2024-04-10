@@ -14,38 +14,61 @@ namespace ChatFrontend.Pages
         public Auth()
         {
             InitializeComponent();
+            RegisterFocusableElements();
+        }
+        private void RegisterFocusableElements()
+        {
+            uiControls.Add(signIn);
+            uiControls.Add(loginBorder);
+            uiControls.Add(passwordBorder);
         }
 
         string loginCurrentValue = "";
         string passwordCurrentValue = "";
 
-        List<Control> uiControls = new List<Control>();
+        HashSet<Border> uiControls = new HashSet<Border>();
 
-        private Control currentFocusElement;
+        private Border currentFocusElement;
 
         bool isButtonDown = false;
         bool isMouseOver = false;
-        SolidColorBrush defaultColor = new SolidColorBrush(Color.FromRgb(116, 53, 156));
+
+        SolidColorBrush defaultButtonColor = new SolidColorBrush(Color.FromRgb(116, 53, 156));
         SolidColorBrush mouseOverColor = new SolidColorBrush(Color.FromRgb(94, 47, 124));
         SolidColorBrush mouseDownColor = new SolidColorBrush(Color.FromRgb(80, 44, 102));
 
         SolidColorBrush errorColor = new SolidColorBrush(Color.FromRgb(239, 49, 36));
 
         SolidColorBrush focusColor = new SolidColorBrush(Color.FromRgb(36, 15, 90));
-        Thickness focusThickness = new Thickness(2);
+        Thickness focusThickness = new Thickness(3);
 
         SolidColorBrush unfocusColor = new SolidColorBrush(Color.FromRgb(26, 26, 26));
         Thickness unfocusThickness = new Thickness(1);
-
-        private void FocusBorder(Border border)
+        private void UnfocusElement()
         {
-            border.BorderBrush = focusColor;
-            border.BorderThickness = focusThickness;
+            foreach (var item in uiControls)
+            {
+                if (item != currentFocusElement)
+                {
+                    UnFocusBorder(item);
+                }
+            }
         }
         private void UnFocusBorder(Border border)
         {
             border.BorderBrush = unfocusColor;
             border.BorderThickness = unfocusThickness;
+        }
+        private void FocusBorder(Border border)
+        {
+            if (currentFocusElement != border)
+            {
+                border.BorderBrush = focusColor;
+                border.BorderThickness = focusThickness;
+                currentFocusElement = border;
+                Keyboard.Focus(border);
+                UnfocusElement();
+            }
         }
         private void SignIn_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -57,15 +80,10 @@ namespace ChatFrontend.Pages
         {
             isMouseOver = false;
             if (!isButtonDown)
-                signIn.Background = defaultColor;
+                signIn.Background = defaultButtonColor;
         }
         private void SignIn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (currentFocusElement != signInText)
-            {
-                currentFocusElement = signInText;
-                FocusBorder(signIn);
-            }
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 isButtonDown = true;
@@ -85,7 +103,7 @@ namespace ChatFrontend.Pages
             if (isMouseOver)
                 signIn.Background = mouseOverColor;
             else
-                signIn.Background = defaultColor;
+                signIn.Background = defaultButtonColor;
 
             if (isMouseOver)
             {
@@ -96,11 +114,15 @@ namespace ChatFrontend.Pages
         {
             if (e.Key == Key.Enter)
             {
+                FocusBorder(signIn);
                 ClickSignIn();
             }
         }
         private void ClickSignIn()
         {
+            ClearLoginError();
+            ClearPasswordError();
+
             string loginValue = login.Text;
             if (string.IsNullOrEmpty(loginValue))
                 SetLoginError("Login cannot be empty!");
@@ -125,19 +147,13 @@ namespace ChatFrontend.Pages
         }
         private void ClearLoginError()
         {
-            if (login != currentFocusElement)
-            {
-                loginBorder.BorderBrush = defaultColor;
-                loginError.Text = null;
-            }
+            loginBorder.BorderBrush = unfocusColor;
+            loginError.Text = null;
         }
         private void ClearPasswordError()
         {
-            if (password != currentFocusElement)
-            {
-                passwordBorder.BorderBrush = defaultColor;
-                passwordError.Text = null;
-            }
+            passwordBorder.BorderBrush = unfocusColor;
+            passwordError.Text = null;
         }
         private void SetPasswordError(string error)
         {
@@ -147,48 +163,36 @@ namespace ChatFrontend.Pages
 
         private void login_SelectionChanged(object sender, RoutedEventArgs e)
         {
+            FocusBorder(loginBorder);
             if (!login.Text.Equals(loginCurrentValue))
             {
                 loginCurrentValue = login.Text;
-                ClearLoginError();
             }
         }
 
         private void password_PasswordChanged(object sender, RoutedEventArgs e)
         {
+            FocusBorder(passwordBorder);
             if (!password.Password.Equals(passwordCurrentValue))
             {
                 passwordCurrentValue = password.Password;
-                ClearPasswordError();   
             }
         }
 
         private void login_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (currentFocusElement != login)
-            {
-                currentFocusElement = login;
-                FocusBorder(loginBorder);
-            }
-        }
-
-        private void login_LostFocus(object sender, RoutedEventArgs e)
-        {
-            UnFocusBorder(loginBorder);
+            FocusBorder(loginBorder);
+            UnfocusElement();
         }
 
         private void password_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (currentFocusElement != password)
-            {
-                currentFocusElement = password;
-                FocusBorder(passwordBorder);
-            }
+            FocusBorder(passwordBorder);
+            UnfocusElement();
         }
-
-        private void password_LostFocus(object sender, RoutedEventArgs e)
+        private void signIn_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            UnFocusBorder(passwordBorder);
+            FocusBorder(signIn);
         }
     }
 }

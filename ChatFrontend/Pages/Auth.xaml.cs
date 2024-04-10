@@ -160,7 +160,14 @@ namespace ChatFrontend.Pages
             passwordError.Text = error;
             passwordBorder.BorderBrush = errorColor;
         }
-
+        private void SetCommonError(string error)
+        {
+            commonError.Text = error;
+        }
+        private void ClearCommonError()
+        {
+            commonError.Text = null;
+        }
         private void login_SelectionChanged(object sender, RoutedEventArgs e)
         {
             FocusBorder(loginBorder);

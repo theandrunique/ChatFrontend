@@ -45,7 +45,7 @@
                                  Style="{StaticResource PlaceholderTextBoxStyle}"
                                  Tag="login"
                                  FontFamily="Open Sans"
-                                 Foreground="#E5E5CB"
+                                 Foreground="#EEEEEE"
                                  SelectionChanged="login_SelectionChanged"
                                  GotFocus="login_GotFocus"/>
                     </Border>
@@ -75,7 +75,7 @@
                                      Background="Transparent"
                                      BorderThickness="0"
                                      FontFamily="Open Sans"
-                                     Foreground="#E5E5CB"
+                                     Foreground="#EEEEEE"
                                      PasswordChanged="password_PasswordChanged"
                                      GotFocus="password_GotFocus"/>
                     </Border>
@@ -121,6 +121,17 @@
                                  Focusable="False"/>
                     </Border>
                 </Grid>
+                <Grid>
+                    <Border MaxWidth="350">
+                        <TextBox x:Name="commonError" 
+                                 Foreground="#ef3124"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 IsReadOnly="True"
+                                 TextWrapping="WrapWithOverflow"
+                                 Focusable="False"/>
+                    </Border>
+                </Grid>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
@@ -128,7 +139,6 @@
                 <ImageBrush ImageSource="/ChatFrontend;component/Images/Background.jpg"
                             Stretch="UniformToFill"/>
             </Grid.Background>
-
         </Grid>
     </Grid>
 </Page>

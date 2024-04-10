@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatFrontend"
         mc:Ignorable="d"
-        Title="Chat" Height="700" Width="1200" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen">
+        Title="Chat" Height="700" Width="1200" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" Icon="/ChatFrontend;component/Images/icon-black.png">
     <Grid>
         <Frame x:Name="frame" NavigationUIVisibility="Hidden"/>
     </Grid>

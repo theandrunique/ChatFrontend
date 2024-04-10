@@ -93,10 +93,10 @@
                             Margin="5"
                             MaxWidth="350"
                             Background="#74359c"
-                            MouseDown="Border_MouseDown"
+                            MouseDown="SignIn_MouseDown"
                             MouseEnter="SignIn_MouseEnter"
-                            MouseLeave="signIn_MouseLeave"
-                            MouseUp="signIn_MouseUp"
+                            MouseLeave="SignIn_MouseLeave"
+                            MouseUp="SignIn_MouseUp"
                             Height="35">
                         <TextBox FontSize="18"
                                  BorderThickness="0"

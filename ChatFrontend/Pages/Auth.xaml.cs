@@ -28,23 +28,23 @@ namespace ChatFrontend.Pages
             if (!isButtonDown)
                 signIn.Background = mouseOverColor;
         }
-        private void signIn_MouseLeave(object sender, MouseEventArgs e)
+        private void SignIn_MouseLeave(object sender, MouseEventArgs e)
         {
             isMouseOver = false;
             if (!isButtonDown)
                 signIn.Background = defaultColor;
         }
 
-        private void Border_MouseDown(object sender, MouseButtonEventArgs e)
+        private void SignIn_MouseDown(object sender, MouseButtonEventArgs e)
         {
             isButtonDown = true;
             signIn.Background = mouseDownColor;
         }
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            signIn_MouseUp(null, null);
+            SignIn_MouseUp(null, null);
         }
-        private void signIn_MouseUp(object sender, MouseButtonEventArgs e)
+        private void SignIn_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (!isButtonDown)
                 return;

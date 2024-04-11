@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       MinWidth="800" MinHeight="450"
       Title="Auth">
-    <Grid MouseUp="Window_MouseUp" Loaded="AuthPage_Loaded">
+    <Grid Loaded="AuthPage_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -19,120 +19,15 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Vertical" Grid.Row="1">
-                <TextBox Text="Sign in" 
-                         Background="Transparent" 
-                         IsEnabled="False" 
-                         HorizontalContentAlignment="Center" 
-                         BorderThickness="0" 
-                         FontSize="30" Margin="0, 0, 0, 20"
-                         Foreground="#8F3EC2"
-                         FontWeight="Bold"
-                         FontFamily="Open Sans"/>
-                <Grid>
-                    <Border x:Name="loginBorder"
-                            BorderThickness="1"
-                            CornerRadius="5"
-                            BorderBrush="Black"
-                            Background="#3b3b3b"
-                            Margin="5"
-                            Padding="5"
-                            MaxWidth="350">
-                        <TextBox x:Name="login"
-                                 FontSize="18" 
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Tag="login"
-                                 FontFamily="Open Sans"
-                                 Foreground="#EEEEEE"
-                                 SelectionChanged="login_SelectionChanged"
-                                 GotFocus="login_GotFocus"
-                                 TextWrapping="WrapWithOverflow"/>
-                    </Border>
-                </Grid>
-                <Grid>
-                    <Border MaxWidth="350">
-                        <TextBox x:Name="loginError" 
-                                 Foreground="#ef3124"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 IsReadOnly="True"
-                                 TextWrapping="WrapWithOverflow"
-                                 Focusable="False"/>
-                    </Border>
-                </Grid>
-                <Grid>
-                    <Border x:Name="passwordBorder"
-                            BorderThickness="1"
-                            CornerRadius="5"
-                            BorderBrush="Black"
-                            Margin="5"
-                            Padding="5"
-                            Background="#3b3b3b"
-                            MaxWidth="350">
-                        <PasswordBox x:Name="password"
-                                     FontSize="18" 
-                                     Background="Transparent"
-                                     BorderThickness="0"
-                                     FontFamily="Open Sans"
-                                     Foreground="#EEEEEE"
-                                     PasswordChanged="password_PasswordChanged"
-                                     GotFocus="password_GotFocus"/>
-                    </Border>
-                </Grid>
-                <Grid>
-                    <Border MaxWidth="350">
-                        <TextBox x:Name="passwordError"
-                                 Foreground="#ef3124"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 IsReadOnly="True"
-                                 TextWrapping="WrapWithOverflow"
-                                 Focusable="False"/>
-                    </Border>
-                </Grid>
-                <Grid Margin="0, 10, 0, 0">
-                    <Border x:Name="signIn"
-                            BorderThickness="1"
-                            CornerRadius="5"
-                            BorderBrush="Black"
-                            Margin="5"
-                            MaxWidth="350"
-                            Background="#74359c"
-                            MouseDown="SignIn_MouseDown"
-                            MouseEnter="SignIn_MouseEnter"
-                            MouseLeave="SignIn_MouseLeave"
-                            MouseUp="SignIn_MouseUp"
-                            Height="35"
-                            PreviewMouseDown="signIn_PreviewMouseDown"
-                            PreviewMouseUp="signIn_PreviewMouseUp">
-                        <TextBox x:Name="signInText"
-                                 FontSize="18"
-                                 BorderThickness="0"
-                                 Text="Sign in"
-                                 Foreground="Black"
-                                 Background="Transparent"
-                                 FontWeight="Bold"
-                                 HorizontalContentAlignment="Center"
-                                 VerticalContentAlignment="Center"
-                                 Cursor="Arrow"
-                                 IsReadOnly="True"
-                                 IsEnabled="True"
-                                 FontFamily="Open Sans"
-                                 Focusable="False"/>
-                    </Border>
-                </Grid>
-                <Grid>
-                    <Border MaxWidth="350">
-                        <TextBox x:Name="commonError" 
-                                 Foreground="#ef3124"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 IsReadOnly="True"
-                                 TextWrapping="WrapWithOverflow"
-                                 Focusable="False"/>
-                    </Border>
-                </Grid>
+            <StackPanel x:Name="form" Orientation="Vertical" Grid.Row="1">
+                <Button Margin="5"
+                        Content="Log In"
+                        Style="{StaticResource ButtonStyle}" 
+                        Click="LogIn_Click"
+                        MaxWidth="350"
+                        Height="35"
+                        FontSize="20"
+                        FontWeight="Bold"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">

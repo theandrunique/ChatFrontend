@@ -84,12 +84,6 @@ namespace ChatFrontend.FormBuilder
             stackPanelForm.Children.Add(field.Build());
             return field;
         }
-        public FormButton AddButton(string buttonText)
-        {
-            FormButton button = new FormButton();
-            //button.Configure(defaultFontFamily, buttonText, );
-            return button;
-        }
         public StackPanel Build() { return stackPanelForm; }
     }
 }

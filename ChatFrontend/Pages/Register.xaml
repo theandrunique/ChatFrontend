@@ -21,19 +21,41 @@
         </Grid>
         <Grid Grid.Column="1" Background="#2c3338">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBox Text="Have an account?" 
+                            FontSize="15" 
+                            Foreground="#8F3EC2"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Focusable="False"/>
+                    <Button Margin="5"
+                        Content="Log In"
+                        Style="{StaticResource ButtonStyle}" 
+                        Click="LogIn_Button"
+                        Width="50"
+                        Height="24"
+                        FontSize="14"/>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Grid.Row="2">
                 <StackPanel x:Name="form" Orientation="Vertical">
                     <Button Margin="5"
-                        Content="Rregister"
+                        Content="Sign up"
                         Style="{StaticResource ButtonStyle}" 
                         Click="Register_Click"
                         MaxWidth="350"
                         Height="35"
-                        FontSize="20"/>
+                        FontSize="20"
+                        FontWeight="Bold"/>
                 </StackPanel>
             </Grid>
         </Grid>

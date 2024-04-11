@@ -1,19 +1,7 @@
 ﻿using ChatFrontend.FormBuilder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ChatFrontend.Pages
 {
@@ -35,7 +23,7 @@ namespace ChatFrontend.Pages
         {
             var registerForm = new FormBuilder.Form();
             registerForm.AddHeader("Register", new Thickness(0, 0, 0, 20));
-            username = registerForm.AddInputField("login");
+            username = registerForm.AddInputField("username");
             email = registerForm.AddInputField("email");
             password = registerForm.AddPasswordInputField("password");
             confirmPassword = registerForm.AddPasswordInputField("confirm password");
@@ -56,6 +44,11 @@ namespace ChatFrontend.Pages
         private void Register_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Count!");
+        }
+
+        private void LogIn_Button(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.OpenPage(new Auth());
         }
     }
 }

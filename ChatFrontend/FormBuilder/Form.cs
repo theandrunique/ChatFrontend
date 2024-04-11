@@ -57,17 +57,21 @@ namespace ChatFrontend.FormBuilder
 
             stackPanelForm.Children.Add(header);
         }
-        public InputField AddInputField(string placeholderText)
+        public InputField AddInputField(string placeholderText, bool withErrorField = true, double width = 350, double maxWidth = 350, double minWidth = 100,
+            double fontSize = 18, bool acceptReturn = false, int maxLines = 1, TextWrapping textWrapping = TextWrapping.Wrap)
         {
             InputField field = new InputField();
 
             field.Configure(defaultFontFamily, defaultInputFieldForeground, 
                 defaultBorderBackground, defaultBorderBrush, 
                 defaultBorderThickness, defaultFocusBorderBrush, 
-                defaultFocusBorderThickness, defaultMaxWidth, defaultFontSize, defaultCornerRadius);
+                defaultFocusBorderThickness, width, maxWidth, minWidth, fontSize, defaultCornerRadius, acceptReturn, maxLines, textWrapping);
 
             field.AddPlaceholder(placeholderText, defaultPlaceholderForeground);
-            field.BuildErrorField(defaultMaxWidth);
+            if (withErrorField)
+            {
+                field.BuildErrorField(defaultMaxWidth);
+            }
             stackPanelForm.Children.Add(field.Build());
             return field;
         }

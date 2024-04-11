@@ -34,8 +34,8 @@ namespace ChatFrontend.FormBuilder
         { }
         public void Configure(FontFamily fontFamily, SolidColorBrush foreground, SolidColorBrush background,
             SolidColorBrush unfocusColor, Thickness unfocusThickness,
-            SolidColorBrush focusColor, Thickness focusThickness, double maxWidth, double fontSize,
-            double cornerRadius)
+            SolidColorBrush focusColor, Thickness focusThickness, double width, double maxWidth, double minWidth, double fontSize,
+            double cornerRadius, bool acceptsReturn, int maxLines, TextWrapping wrap)
         {
             this.foreground = foreground;
             this.focusThickness = focusThickness;
@@ -45,9 +45,13 @@ namespace ChatFrontend.FormBuilder
             this.fontFamily = fontFamily;
 
             inputField = new Grid();
-            border = CreateBorder(cornerRadius, background, maxWidth);
+            border = CreateBorder(cornerRadius, background, maxWidth, width);
             textBox = new TextBox();
             textBox.FontSize = fontSize;
+            textBox.AcceptsReturn = acceptsReturn;
+            textBox.MinWidth = minWidth;
+            textBox.MaxLines = maxLines;
+            textBox.TextWrapping = wrap;
         }
         public StackPanel Build()
         {
@@ -77,7 +81,10 @@ namespace ChatFrontend.FormBuilder
             field.Orientation = Orientation.Vertical;
 
             field.Children.Add(inputField);
-            field.Children.Add(errorField);
+            if (errorField != null)
+            {
+                field.Children.Add(errorField);
+            }
 
             return field;
         }
@@ -127,7 +134,7 @@ namespace ChatFrontend.FormBuilder
             }
         }
 
-        public Border CreateBorder(double cornerRadius, SolidColorBrush background, double maxWidth)
+        public Border CreateBorder(double cornerRadius, SolidColorBrush background, double maxWidth, double width)
         {
             Border border = new Border();
 
@@ -138,6 +145,7 @@ namespace ChatFrontend.FormBuilder
             border.Margin = new Thickness(5);
             border.Padding = new Thickness(5);
             border.MaxWidth = maxWidth;
+            border.Width = width;
 
             return border;
         }

@@ -3,12 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       xmlns:local="clr-namespace:ChatFrontend.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       MinWidth="800" MinHeight="450"
       Title="Auth">
-    <Grid MouseUp="Window_MouseUp" Loaded="AuthPage_Loaded">
+    <Grid Loaded="AuthPage_Loaded">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -49,13 +50,21 @@
             <Grid Grid.Row="2">
                 <StackPanel x:Name="form" Orientation="Vertical">
                     <Button Margin="5"
-                        Content="Sign up"
                         Style="{StaticResource ButtonStyle}" 
                         Click="Register_Click"
                         MaxWidth="350"
                         Height="35"
                         FontSize="20"
-                        FontWeight="Bold"/>
+                        FontWeight="Bold"
+                        x:Name="RegisterButton">
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="ButtonLoading"
+                                   Margin="5" 
+                                   Visibility="Collapsed"
+                                   gif:ImageBehavior.AnimatedSource="/ChatFrontend;component/Images/loading_button.gif"/>
+                            <TextBlock x:Name="RegisterText" Text="Sign up"/>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>

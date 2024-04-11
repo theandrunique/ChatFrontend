@@ -141,5 +141,13 @@
   <ItemGroup>
     <Resource Include="Images\icon-black.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading_button.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WpfAnimatedGif">
+      <Version>2.0.2</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

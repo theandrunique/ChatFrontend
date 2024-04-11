@@ -1,7 +1,10 @@
 ﻿using ChatFrontend.FormBuilder;
+using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace ChatFrontend.Pages
 {
@@ -36,11 +39,6 @@ namespace ChatFrontend.Pages
 
             form.Children.Insert(0, registerForm.Build());
         }
-        
-
-        private void Window_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-        }
 
         private void AuthPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -49,7 +47,16 @@ namespace ChatFrontend.Pages
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Count!");
+            SetLoading(true);
+            RegisterButton.IsEnabled = false;
+
+            //SetLoading(false);
+            RegisterButton.IsEnabled = true;
+        }
+        private void SetLoading(bool loading)
+        {
+            if (loading) ButtonLoading.Visibility = Visibility.Visible;
+            else ButtonLoading.Visibility = Visibility.Collapsed;
         }
 
         private void LogIn_Button(object sender, RoutedEventArgs e)

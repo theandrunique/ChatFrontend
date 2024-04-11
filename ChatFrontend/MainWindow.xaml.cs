@@ -20,10 +20,13 @@ namespace ChatFrontend
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance;
         public MainWindow()
         {
             InitializeComponent();
-            OpenPage(new Pages.Auth());
+            Instance = this;
+
+            OpenPage(new Pages.Register());
         }
         public void OpenPage(Page page)
         {

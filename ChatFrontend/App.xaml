@@ -30,11 +30,12 @@
                                 x:Name="Border">
                             <ContentControl Content="{TemplateBinding Content}"
                                             Foreground="{StaticResource ButtonForegroundBrush}"
-                                            FontWeight="Bold"
+                                            FontWeight="{TemplateBinding FontWeight}"
                                             HorizontalAlignment="Center" 
                                             VerticalAlignment="Center"
                                             Focusable="False"
-                                            FontFamily="{StaticResource FontFamily}"/>
+                                            FontFamily="{StaticResource FontFamily}"
+                                            FontSize="{TemplateBinding FontSize}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">

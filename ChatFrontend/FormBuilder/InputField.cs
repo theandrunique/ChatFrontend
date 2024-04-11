@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace ChatFrontend.FormBuilder
 {
@@ -15,22 +11,30 @@ namespace ChatFrontend.FormBuilder
         private FontFamily fontFamily;
 
         private SolidColorBrush foreground;
+        private SolidColorBrush errorBrush = new SolidColorBrush(Color.FromRgb(239, 49, 36));
 
-        Grid field;
+        StackPanel field;
+
+
+        Grid errorField;
+        Grid inputField;
+
         Border border;
         TextBlock placeholder;
         TextBox textBox;
+        TextBox errorTextBox;
 
         SolidColorBrush focusColor;
         Thickness focusThickness;
 
         SolidColorBrush unfocusColor;
         Thickness unfocusThickness;
+        public string Value { get { return textBox.Text; } }
 
         public InputField()
         { }
         public void Configure(FontFamily fontFamily, SolidColorBrush foreground, SolidColorBrush background,
-            SolidColorBrush unfocusColor, Thickness unfocusThickness, 
+            SolidColorBrush unfocusColor, Thickness unfocusThickness,
             SolidColorBrush focusColor, Thickness focusThickness, double maxWidth, double fontSize,
             double cornerRadius)
         {
@@ -41,12 +45,12 @@ namespace ChatFrontend.FormBuilder
             this.unfocusThickness = unfocusThickness;
             this.fontFamily = fontFamily;
 
-            field = new Grid();
+            inputField = new Grid();
             border = CreateBorder(cornerRadius, background, maxWidth);
             textBox = new TextBox();
             textBox.FontSize = fontSize;
         }
-        public Grid Build()
+        public StackPanel Build()
         {
             textBox.Background = Brushes.Transparent;
             textBox.BorderThickness = new Thickness(0);
@@ -67,9 +71,38 @@ namespace ChatFrontend.FormBuilder
 
             border.Child = gridWithPlaceholder;
 
-            field.Children.Add(border);
+            inputField.Children.Add(border);
+
+            field = new StackPanel();
+
+            field.Orientation = Orientation.Vertical;
+
+            field.Children.Add(inputField);
+            field.Children.Add(errorField);
 
             return field;
+        }
+        public Grid BuildErrorField(double mawidth)
+        {
+            errorField = new Grid();
+
+            Border errorBorder = new Border();
+            errorBorder.MaxWidth = mawidth;
+
+            errorTextBox = new TextBox();
+
+            errorTextBox.Foreground = errorBrush;
+            errorTextBox.Background = Brushes.Transparent;
+            errorTextBox.BorderThickness = new Thickness(0);
+            errorTextBox.IsReadOnly = true;
+            errorTextBox.TextWrapping = TextWrapping.WrapWithOverflow;
+            errorTextBox.Focusable = false;
+
+            errorBorder.Child = errorTextBox;
+
+            errorField.Children.Add(errorBorder);
+
+            return errorField;
         }
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -123,6 +156,15 @@ namespace ChatFrontend.FormBuilder
             Panel.SetZIndex(placeholder, -1);
 
             this.placeholder = placeholder;
+        }
+        public void SetError(string errorText)
+        {
+            errorTextBox.Text = errorText;
+            border.BorderBrush = errorBrush;
+        }
+        public void ClearError()
+        {
+            errorTextBox.Text = null;
         }
     }
 }

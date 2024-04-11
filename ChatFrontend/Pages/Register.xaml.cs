@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatFrontend.FormBuilder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace ChatFrontend.Pages
     /// </summary>
     public partial class Register : Page
     {
+        InputField login;
         public Register()
         {
             InitializeComponent();
@@ -30,7 +32,7 @@ namespace ChatFrontend.Pages
         {
             var registerForm = new FormBuilder.Form();
             registerForm.AddHeader("Register", new Thickness(0, 0, 0, 20));
-            registerForm.AddInputField("login");
+            login = registerForm.AddInputField("login");
             registerForm.AddInputField("password");
 
             form.Children.Add(registerForm.Build());
@@ -39,7 +41,14 @@ namespace ChatFrontend.Pages
 
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
         {
-
+            if (e.LeftButton == MouseButtonState.Released)
+            {
+                login.SetError("weads");
+            }
+            if (e.RightButton == MouseButtonState.Released)
+            {
+                login.ClearError();
+            }
         }
 
         private void AuthPage_Loaded(object sender, RoutedEventArgs e)

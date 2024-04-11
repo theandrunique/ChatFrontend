@@ -56,7 +56,7 @@ namespace ChatFrontend.FormBuilder
 
             stackPanelForm.Children.Add(header);
         }
-        public void AddInputField(string placeholderText)
+        public InputField AddInputField(string placeholderText)
         {
             InputField field = new InputField();
 
@@ -66,7 +66,9 @@ namespace ChatFrontend.FormBuilder
                 defaultFocusBorderThickness, defaultMaxWidth, defaultFontSize, defaultCornerRadius);
 
             field.AddPlaceholder(placeholderText, defaultPlaceholderForeground);
+            field.BuildErrorField(defaultMaxWidth);
             stackPanelForm.Children.Add(field.Build());
+            return field;
         }
         public StackPanel Build() { return stackPanelForm; }
     }

@@ -12,33 +12,54 @@ namespace ChatFrontend.FormBuilder
 {
     public class PasswordField
     {
-        private static FontFamily defaultFontFamily = new FontFamily("Open Sans");
-        private static SolidColorBrush defaultForeground = new SolidColorBrush(Color.FromRgb(238, 238, 238));
+        private FontFamily fontFamily;
 
-        Grid field;
+        private SolidColorBrush foreground;
+        private SolidColorBrush errorBrush = new SolidColorBrush(Color.FromRgb(239, 49, 36));
+
+        StackPanel field;
+
+
+        Grid errorField;
+        Grid inputField;
+
         Border border;
         TextBlock placeholder;
         PasswordBox textBox;
+        TextBox errorTextBox;
 
-        SolidColorBrush focusColor = new SolidColorBrush(Color.FromRgb(36, 15, 90));
-        Thickness focusThickness = new Thickness(3);
+        SolidColorBrush focusColor;
+        Thickness focusThickness;
 
-        SolidColorBrush unfocusColor = new SolidColorBrush(Color.FromRgb(26, 26, 26));
-        Thickness unfocusThickness = new Thickness(1);
+        SolidColorBrush unfocusColor;
+        Thickness unfocusThickness;
+        public string Value { get { return textBox.Password; } }
 
         public PasswordField()
+        { }
+        public void Configure(FontFamily fontFamily, SolidColorBrush foreground, SolidColorBrush background,
+            SolidColorBrush unfocusColor, Thickness unfocusThickness,
+            SolidColorBrush focusColor, Thickness focusThickness, double maxWidth, double fontSize,
+            double cornerRadius)
         {
-            field = new Grid();
-            border = CreateBorder();
+            this.foreground = foreground;
+            this.focusThickness = focusThickness;
+            this.focusColor = focusColor;
+            this.unfocusColor = unfocusColor;
+            this.unfocusThickness = unfocusThickness;
+            this.fontFamily = fontFamily;
+
+            inputField = new Grid();
+            border = CreateBorder(cornerRadius, background, maxWidth);
             textBox = new PasswordBox();
+            textBox.FontSize = fontSize;
         }
-        public Grid Build()
+        public StackPanel Build()
         {
-            textBox.FontSize = 18;
             textBox.Background = Brushes.Transparent;
             textBox.BorderThickness = new Thickness(0);
-            textBox.FontFamily = defaultFontFamily;
-            textBox.Foreground = defaultForeground;
+            textBox.FontFamily = fontFamily;
+            textBox.Foreground = foreground;
 
             Grid gridWithPlaceholder = new Grid();
             gridWithPlaceholder.Children.Add(textBox);
@@ -54,9 +75,38 @@ namespace ChatFrontend.FormBuilder
 
             border.Child = gridWithPlaceholder;
 
-            field.Children.Add(border);
+            inputField.Children.Add(border);
+
+            field = new StackPanel();
+
+            field.Orientation = Orientation.Vertical;
+
+            field.Children.Add(inputField);
+            field.Children.Add(errorField);
 
             return field;
+        }
+        public Grid BuildErrorField(double mawidth)
+        {
+            errorField = new Grid();
+
+            Border errorBorder = new Border();
+            errorBorder.MaxWidth = mawidth;
+
+            errorTextBox = new TextBox();
+
+            errorTextBox.Foreground = errorBrush;
+            errorTextBox.Background = Brushes.Transparent;
+            errorTextBox.BorderThickness = new Thickness(0);
+            errorTextBox.IsReadOnly = true;
+            errorTextBox.TextWrapping = TextWrapping.WrapWithOverflow;
+            errorTextBox.Focusable = false;
+
+            errorBorder.Child = errorTextBox;
+
+            errorField.Children.Add(errorBorder);
+
+            return errorField;
         }
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -82,42 +132,27 @@ namespace ChatFrontend.FormBuilder
             }
         }
 
-
-        private static SolidColorBrush defaultBorderBackground = new SolidColorBrush(Color.FromRgb(59, 59, 59));
-        private static SolidColorBrush defaultBorderBrush = new SolidColorBrush(Color.FromRgb(26, 26, 26));
-
-        public static Border CreateBorder(double borderThickness = 1, double cornerRadius = 5,
-            SolidColorBrush borderBrush = null, SolidColorBrush background = null,
-            double padding = 5, double margin = 5, int maxWidth = 350)
+        public Border CreateBorder(double cornerRadius, SolidColorBrush background, double maxWidth)
         {
-            if (borderBrush == null) borderBrush = defaultBorderBrush;
-            if (background == null) background = defaultBorderBackground;
-
             Border border = new Border();
 
-            border.BorderThickness = new Thickness(borderThickness);
+            border.BorderThickness = unfocusThickness;
             border.CornerRadius = new CornerRadius(cornerRadius);
             border.Background = background;
-            border.BorderBrush = borderBrush;
-            border.Margin = new Thickness(margin);
-            border.Padding = new Thickness(padding);
+            border.BorderBrush = unfocusColor;
+            border.Margin = new Thickness(5);
+            border.Padding = new Thickness(5);
             border.MaxWidth = maxWidth;
 
             return border;
         }
-        private static SolidColorBrush defaultPlaceholderForeground = new SolidColorBrush(Color.FromRgb(238, 238, 238));
-        public void AddPlaceholder(string placeholderText, double fontSize = 18,
-            FontFamily fontFamily = null,
-            SolidColorBrush foreground = null)
+        public void AddPlaceholder(string placeholderText, SolidColorBrush placeholderForeground)
         {
-            if (fontFamily == null) fontFamily = defaultFontFamily;
-            if (foreground == null) foreground = defaultPlaceholderForeground;
-
             TextBlock placeholder = new TextBlock();
             placeholder.Text = placeholderText;
-            placeholder.FontSize = fontSize;
+            placeholder.FontSize = textBox.FontSize;
             placeholder.FontFamily = fontFamily;
-            placeholder.Foreground = foreground;
+            placeholder.Foreground = placeholderForeground;
             placeholder.VerticalAlignment = VerticalAlignment.Center;
             placeholder.HorizontalAlignment = HorizontalAlignment.Left;
             placeholder.Margin = new Thickness(1, 0, 0, 0);
@@ -125,6 +160,15 @@ namespace ChatFrontend.FormBuilder
             Panel.SetZIndex(placeholder, -1);
 
             this.placeholder = placeholder;
+        }
+        public void SetError(string errorText)
+        {
+            errorTextBox.Text = errorText;
+            border.BorderBrush = errorBrush;
+        }
+        public void ClearError()
+        {
+            errorTextBox.Text = null;
         }
     }
 }

@@ -70,6 +70,26 @@ namespace ChatFrontend.FormBuilder
             stackPanelForm.Children.Add(field.Build());
             return field;
         }
+        public PasswordField AddPasswordInputField(string placeholderText)
+        {
+            PasswordField field = new PasswordField();
+
+            field.Configure(defaultFontFamily, defaultInputFieldForeground,
+                defaultBorderBackground, defaultBorderBrush,
+                defaultBorderThickness, defaultFocusBorderBrush,
+                defaultFocusBorderThickness, defaultMaxWidth, defaultFontSize, defaultCornerRadius);
+
+            field.AddPlaceholder(placeholderText, defaultPlaceholderForeground);
+            field.BuildErrorField(defaultMaxWidth);
+            stackPanelForm.Children.Add(field.Build());
+            return field;
+        }
+        public FormButton AddButton(string buttonText)
+        {
+            FormButton button = new FormButton();
+            //button.Configure(defaultFontFamily, buttonText, );
+            return button;
+        }
         public StackPanel Build() { return stackPanelForm; }
     }
 }

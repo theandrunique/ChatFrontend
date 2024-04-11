@@ -2,7 +2,6 @@
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace ChatFrontend.FormBuilder
 {

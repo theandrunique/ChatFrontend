@@ -15,7 +15,8 @@ namespace ChatFrontend.FormBuilder
         private static SolidColorBrush defaultInputFieldForeground = new SolidColorBrush(Color.FromRgb(238, 238, 238));
 
 
-        SolidColorBrush defaultFocusBorderBrush = new SolidColorBrush(Color.FromRgb(36, 15, 90));
+        //SolidColorBrush defaultFocusBorderBrush = new SolidColorBrush(Color.FromRgb(145, 87, 182));
+        SolidColorBrush defaultFocusBorderBrush = new SolidColorBrush(Color.FromRgb(26, 35, 168));
         Thickness defaultFocusBorderThickness = new Thickness(3);
 
         SolidColorBrush defaultBorderBrush = new SolidColorBrush(Color.FromRgb(26, 26, 26));

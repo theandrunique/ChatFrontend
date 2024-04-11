@@ -13,15 +13,18 @@ namespace ChatFrontend.Pages
     {
         InputField login;
         PasswordField password;
-        public Auth()
+        public Auth(string login = null)
         {
             InitializeComponent();
             CreateForm();
+
+            if (login != null)
+                this.login.Value = login;
         }
         private void CreateForm()
         {
             var registerForm = new FormBuilder.Form();
-            registerForm.AddHeader("Log In", new Thickness(0, 0, 0, 20));
+            registerForm.AddHeader("Log in", new Thickness(0, 0, 0, 20));
             login = registerForm.AddInputField("login");
             password = registerForm.AddPasswordInputField("password");
 
@@ -54,6 +57,11 @@ namespace ChatFrontend.Pages
             MessageBox.Show("Click counted!");
             login.SetError("- Some very very long error that cannot be shown in window\n- overflow overflow\n- overflow overflow overflow overflow overflow");
             password.SetError("- Some very very long error that cannot be shown in window\n- overflow overflow\n- overflow overflow overflow overflow overflow");
+        }
+
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.Instance.OpenPage(new Register(login.Value));
         }
     }
 }

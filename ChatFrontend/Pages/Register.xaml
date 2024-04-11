@@ -19,7 +19,7 @@
                             Stretch="UniformToFill"/>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Column="1" Background="#2c3338">
+        <Grid Grid.Column="1" Background="#1e1e1e">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -37,7 +37,7 @@
                             VerticalContentAlignment="Center"
                             Focusable="False"/>
                     <Button Margin="5"
-                        Content="Log In"
+                        Content="Log in"
                         Style="{StaticResource ButtonStyle}" 
                         Click="LogIn_Button"
                         Width="50"

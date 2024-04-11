@@ -28,7 +28,7 @@ namespace ChatFrontend.FormBuilder
 
         SolidColorBrush unfocusColor;
         Thickness unfocusThickness;
-        public string Value { get { return textBox.Text; } }
+        public string Value { get { return textBox.Text; } set { textBox.Text = value; } }
 
         public InputField()
         { }

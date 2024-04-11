@@ -14,15 +14,21 @@ namespace ChatFrontend.Pages
         InputField email;
         PasswordField password;
         PasswordField confirmPassword;
-        public Register()
+        public Register(string login = null)
         {
             InitializeComponent();
             CreateForm();
+
+            if (login != null)
+                if (login.Contains("@"))
+                    email.Value = login;
+                else
+                    username.Value = login;
         }
         private void CreateForm()
         {
             var registerForm = new FormBuilder.Form();
-            registerForm.AddHeader("Register", new Thickness(0, 0, 0, 20));
+            registerForm.AddHeader("Sign up", new Thickness(0, 0, 0, 20));
             username = registerForm.AddInputField("username");
             email = registerForm.AddInputField("email");
             password = registerForm.AddPasswordInputField("password");
@@ -48,7 +54,13 @@ namespace ChatFrontend.Pages
 
         private void LogIn_Button(object sender, RoutedEventArgs e)
         {
-            MainWindow.Instance.OpenPage(new Auth());
+            string transfer = null;
+            if (!string.IsNullOrEmpty(username.Value))
+                transfer = username.Value;
+            if (!string.IsNullOrEmpty(email.Value))
+                transfer = email.Value;
+
+            MainWindow.Instance.OpenPage(new Auth(transfer));
         }
     }
 }

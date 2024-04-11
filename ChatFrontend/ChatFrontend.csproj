@@ -80,6 +80,7 @@
       <DependentUpon>Message.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormBuilder\Form.cs" />
+    <Compile Include="FormBuilder\FormButton.cs" />
     <Compile Include="FormBuilder\InputField.cs" />
     <Compile Include="FormBuilder\PasswordField.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -87,6 +88,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\Auth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AuthTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -98,6 +103,9 @@
   <ItemGroup>
     <Compile Include="Pages\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AuthTest.xaml.cs">
+      <DependentUpon>AuthTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -119,6 +127,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\OpenSans-Italic-VariableFont_wdth,wght.ttf" />
+    <Resource Include="Fonts\OpenSans-VariableFont_wdth,wght.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

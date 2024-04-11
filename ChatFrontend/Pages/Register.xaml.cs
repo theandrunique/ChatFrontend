@@ -22,7 +22,10 @@ namespace ChatFrontend.Pages
     /// </summary>
     public partial class Register : Page
     {
-        InputField login;
+        InputField username;
+        InputField email;
+        PasswordField password;
+        PasswordField confirmPassword;
         public Register()
         {
             InitializeComponent();
@@ -32,28 +35,27 @@ namespace ChatFrontend.Pages
         {
             var registerForm = new FormBuilder.Form();
             registerForm.AddHeader("Register", new Thickness(0, 0, 0, 20));
-            login = registerForm.AddInputField("login");
-            registerForm.AddInputField("password");
+            username = registerForm.AddInputField("login");
+            email = registerForm.AddInputField("email");
+            password = registerForm.AddPasswordInputField("password");
+            confirmPassword = registerForm.AddPasswordInputField("confirm password");
 
-            form.Children.Add(registerForm.Build());
+            form.Children.Insert(0, registerForm.Build());
         }
         
 
         private void Window_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Released)
-            {
-                login.SetError("weads");
-            }
-            if (e.RightButton == MouseButtonState.Released)
-            {
-                login.ClearError();
-            }
         }
 
         private void AuthPage_Loaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Register_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Count!");
         }
     }
 }

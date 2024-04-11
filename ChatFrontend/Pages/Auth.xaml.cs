@@ -201,5 +201,10 @@ namespace ChatFrontend.Pages
         {
             FocusBorder(signIn);
         }
+
+        private void signIn_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            UnfocusElement();
+        }
     }
 }

@@ -42,12 +42,12 @@
                                  FontSize="18" 
                                  Background="Transparent"
                                  BorderThickness="0"
-                                 Style="{StaticResource PlaceholderTextBoxStyle}"
                                  Tag="login"
                                  FontFamily="Open Sans"
                                  Foreground="#EEEEEE"
                                  SelectionChanged="login_SelectionChanged"
-                                 GotFocus="login_GotFocus"/>
+                                 GotFocus="login_GotFocus"
+                                 TextWrapping="WrapWithOverflow"/>
                     </Border>
                 </Grid>
                 <Grid>
@@ -104,7 +104,8 @@
                             MouseLeave="SignIn_MouseLeave"
                             MouseUp="SignIn_MouseUp"
                             Height="35"
-                            PreviewMouseDown="signIn_PreviewMouseDown">
+                            PreviewMouseDown="signIn_PreviewMouseDown"
+                            PreviewMouseUp="signIn_PreviewMouseUp">
                         <TextBox x:Name="signInText"
                                  FontSize="18"
                                  BorderThickness="0"

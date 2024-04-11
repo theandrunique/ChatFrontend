@@ -25,7 +25,16 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="form" Grid.Row="1">
+            <Grid Grid.Row="1">
+                <StackPanel x:Name="form" Orientation="Vertical">
+                    <Button Margin="5"
+                        Content="Rregister"
+                        Style="{StaticResource ButtonStyle}" 
+                        Click="Register_Click"
+                        MaxWidth="350"
+                        Height="35"
+                        FontSize="20"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

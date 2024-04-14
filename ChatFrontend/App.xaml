@@ -14,9 +14,9 @@
 
         <SolidColorBrush x:Key="InputFieldBackground" Color="#3b3b3b"/>
 
-        <SolidColorBrush x:Key="ButtonForegroundBrush" Color="Black"/>
-        <SolidColorBrush x:Key="ButtonBackground" Color="#74359c"/>
-        <SolidColorBrush x:Key="ButtonMouseOverBackground" Color="#5e2f7c"/>
+        <SolidColorBrush x:Key="ButtonForegroundBrush" Color="#ffffff"/>
+        <SolidColorBrush x:Key="ButtonBackground" Color="#9147ff"/>
+        <SolidColorBrush x:Key="ButtonMouseOverBackground" Color="#74359c"/>
         <SolidColorBrush x:Key="ButtonPressedBackground" Color="#502c66"/>
 
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -44,10 +44,6 @@
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="Border" Property="Background" Value="{StaticResource ButtonPressedBackground}"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource FocusedBorderBrush}"/>
-                                <Setter TargetName="Border" Property="BorderThickness" Value="3"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

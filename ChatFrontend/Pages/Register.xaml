@@ -20,7 +20,7 @@
                             Stretch="UniformToFill"/>
             </Grid.Background>
         </Grid>
-        <Grid Grid.Column="1" Background="#1e1e1e">
+        <Grid Grid.Column="1" Background="#18181b">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
@@ -31,7 +31,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBox Text="Have an account?" 
                             FontSize="15" 
-                            Foreground="#8F3EC2"
+                            Foreground="#9147ff"
                             Background="Transparent"
                             BorderThickness="0"
                             HorizontalContentAlignment="Center"
@@ -62,7 +62,7 @@
                                    Margin="5" 
                                    Visibility="Collapsed"
                                    gif:ImageBehavior.AnimatedSource="/ChatFrontend;component/Images/loading_button.gif"/>
-                            <TextBlock x:Name="RegisterText" Text="Sign up"/>
+                            <TextBlock x:Name="RegisterText" Text="Sign up" Foreground="#ffffff"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

@@ -12,11 +12,11 @@ namespace ChatFrontend.FormBuilder
     public class Form
     {
         private static FontFamily defaultFontFamily = new FontFamily("Open Sans");
-        private static SolidColorBrush defaultInputFieldForeground = new SolidColorBrush(Color.FromRgb(238, 238, 238));
+        private static SolidColorBrush defaultInputFieldForeground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
 
 
         //SolidColorBrush defaultFocusBorderBrush = new SolidColorBrush(Color.FromRgb(145, 87, 182));
-        SolidColorBrush defaultFocusBorderBrush = new SolidColorBrush(Color.FromRgb(26, 35, 168));
+        SolidColorBrush defaultFocusBorderBrush = new SolidColorBrush(Color.FromRgb(145, 71, 255));
         Thickness defaultFocusBorderThickness = new Thickness(3);
 
         SolidColorBrush defaultBorderBrush = new SolidColorBrush(Color.FromRgb(26, 26, 26));
@@ -26,7 +26,7 @@ namespace ChatFrontend.FormBuilder
 
         SolidColorBrush defaultPlaceholderForeground = new SolidColorBrush(Color.FromRgb(238, 238, 238));
 
-        SolidColorBrush defaultHeaderForeground = new SolidColorBrush(Color.FromRgb(143, 62, 194));
+        SolidColorBrush defaultHeaderForeground = new SolidColorBrush(Color.FromRgb(145, 71, 255));
         double defaultMaxWidth = 350;
         double defaultFontSize = 18;
         double defaultCornerRadius = 5;

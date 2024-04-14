@@ -2,6 +2,7 @@
 using ChatFrontend.FormBuilder;
 using Newtonsoft.Json;
 using System;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -91,50 +92,56 @@ namespace ChatFrontend.Pages
             if (CheckIsFieldsValid()) return;
 
             RegisterButton.IsEnabled = false;
-
-            var res = await MainWindow.Adapter.SignUp(username.Value, email.Value, password.Value);
-            if (!res.IsSuccessStatusCode)
+            try
             {
-                int statusCode = Convert.ToInt32(res.StatusCode);
-                if (statusCode == 422)
+                var res = await MainWindow.Adapter.SignUp(username.Value, email.Value, password.Value);
+                if (!res.IsSuccessStatusCode)
                 {
-                    var json = await res.Content.ReadAsStringAsync();
-                    UnprocessableEntity error = JsonConvert.DeserializeObject<UnprocessableEntity>(json);
-
-                    foreach (var detail in error.Detail)
+                    int statusCode = Convert.ToInt32(res.StatusCode);
+                    if (statusCode == 422)
                     {
-                        if (detail.Loc[1] == "username")
-                            username.SetError(detail.Msg);
-                        else if (detail.Loc[1] == "email")
-                            email.SetError(detail.Msg);
-                        else if (detail.Loc[1] == "password")
-                            password.SetError(detail.Msg);
+                        var json = await res.Content.ReadAsStringAsync();
+                        UnprocessableEntity error = JsonConvert.DeserializeObject<UnprocessableEntity>(json);
+
+                        foreach (var detail in error.Detail)
+                        {
+                            if (detail.Loc[1] == "username")
+                                username.SetError(detail.Msg);
+                            else if (detail.Loc[1] == "email")
+                                email.SetError(detail.Msg);
+                            else if (detail.Loc[1] == "password")
+                                password.SetError(detail.Msg);
+                            else
+                                commonFormError.Text = detail.Msg;
+                        }
+                    }
+                    else if (statusCode >= 400 && statusCode < 500)
+                    {
+                        var json = await res.Content.ReadAsStringAsync();
+
+                        ErrorResponse error = JsonConvert.DeserializeObject<ErrorResponse>(json);
+
+                        if (error.Detail.Contains("username"))
+                            username.SetError(error.Detail);
+                        else if (error.Detail.Contains("email"))
+                            email.SetError(error.Detail);
                         else
-                            commonFormError.Text = detail.Msg;
+                            commonFormError.Text = error.Detail;
+
+                    }
+                    else if (statusCode >= 500 && statusCode < 600)
+                    {
+                        commonFormError.Text = "Sever Error";
                     }
                 }
-                else if (statusCode >= 400 && statusCode < 500)
+                else
                 {
-                    var json = await res.Content.ReadAsStringAsync();
-
-                    ErrorResponse error = JsonConvert.DeserializeObject<ErrorResponse>(json);
-
-                    if (error.Detail.Contains("username"))
-                        username.SetError(error.Detail);
-                    else if (error.Detail.Contains("email"))
-                        email.SetError(error.Detail);
-                    else
-                        commonFormError.Text = error.Detail;
-
-                }
-                else if (statusCode >= 500 && statusCode < 600)
-                {
-                    commonFormError.Text = "Sever Error";
+                    MainWindow.Instance.OpenPage(new RegisterSuccess(email.Value));
                 }
             }
-            else
+            catch (HttpRequestException)
             {
-                MainWindow.Instance.OpenPage(new RegisterSuccess(email.Value));
+                commonFormError.Text = "Internet connection error";
             }
 
             RegisterButton.IsEnabled = true;

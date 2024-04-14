@@ -72,40 +72,46 @@ namespace ChatFrontend.Pages
             if (isErrors) return;
 
             LogInButton.IsEnabled = false;
-
-            var res = await MainWindow.Adapter.GetAuth(login.Value, password.Value);
-            if (!res.IsSuccessStatusCode)
+            try
             {
-                int statusCode = Convert.ToInt32(res.StatusCode);
-                if (statusCode == 422)
+                var res = await MainWindow.Adapter.GetAuth(login.Value, password.Value);
+                if (!res.IsSuccessStatusCode)
                 {
-                    var json = await res.Content.ReadAsStringAsync();
-                    UnprocessableEntity error = JsonConvert.DeserializeObject<UnprocessableEntity>(json);
-
-                    StringBuilder errorMessage = new StringBuilder();
-                    foreach (var detail in error.Detail)
+                    int statusCode = Convert.ToInt32(res.StatusCode);
+                    if (statusCode == 422)
                     {
-                        errorMessage.AppendLine($"{detail.Loc[1]} | {detail.Msg}");
+                        var json = await res.Content.ReadAsStringAsync();
+                        UnprocessableEntity error = JsonConvert.DeserializeObject<UnprocessableEntity>(json);
+
+                        StringBuilder errorMessage = new StringBuilder();
+                        foreach (var detail in error.Detail)
+                        {
+                            errorMessage.AppendLine($"{detail.Loc[1]} | {detail.Msg}");
+                        }
+                        commonFormError.Text = errorMessage.ToString();
                     }
-                    commonFormError.Text = errorMessage.ToString();
-                }
-                else if (statusCode >= 400 && statusCode < 500)
-                {
-                    var json = await res.Content.ReadAsStringAsync();
+                    else if (statusCode >= 400 && statusCode < 500)
+                    {
+                        var json = await res.Content.ReadAsStringAsync();
 
-                    ErrorResponse error = JsonConvert.DeserializeObject<ErrorResponse>(json);
+                        ErrorResponse error = JsonConvert.DeserializeObject<ErrorResponse>(json);
 
-                    login.SetError(error.Detail);
-                    password.SetError(error.Detail);
+                        login.SetError(error.Detail);
+                        password.SetError(error.Detail);
+                    }
+                    else if (statusCode >= 500 && statusCode < 600)
+                    {
+                        commonFormError.Text = "Sever Error";
+                    }
                 }
-                else if (statusCode >= 500 && statusCode < 600)
+                else
                 {
-                    commonFormError.Text = "Sever Error";
+                    MainWindow.Instance.OpenPage(new MessangerPage());
                 }
             }
-            else
+            catch (HttpRequestException)
             {
-                MainWindow.Instance.OpenPage(new MessangerPage());
+                commonFormError.Text = "Internet connection error";
             }
 
             LogInButton.IsEnabled = true;

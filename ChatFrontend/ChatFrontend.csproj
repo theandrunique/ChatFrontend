@@ -75,8 +75,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\BackendAdapter.cs" />
     <Compile Include="Classes\ChatHistory.cs" />
+    <Compile Include="Classes\Error.cs" />
+    <Compile Include="Classes\Exceptions\AuthException.cs" />
     <Compile Include="Classes\Message.cs" />
+    <Compile Include="Classes\Responses\AuthResponse.cs" />
     <Compile Include="Components\ChatHistory.xaml.cs">
       <DependentUpon>ChatHistory.xaml</DependentUpon>
     </Compile>
@@ -159,6 +163,9 @@
     <Resource Include="Images\loading_button.gif" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
     <PackageReference Include="WpfAnimatedGif">
       <Version>2.0.2</Version>
     </PackageReference>

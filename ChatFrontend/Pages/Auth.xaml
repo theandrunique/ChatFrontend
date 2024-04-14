@@ -20,7 +20,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <StackPanel x:Name="form" Orientation="Vertical" Grid.Row="1">
-                <Button Margin="5"
+                <Button x:Name="LogInButton"
+                        Margin="5"
                         Content="Log in"
                         Style="{StaticResource ButtonStyle}" 
                         Click="LogIn_Click"

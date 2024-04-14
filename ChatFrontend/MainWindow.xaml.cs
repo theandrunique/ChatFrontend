@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChatFrontend.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,7 @@ namespace ChatFrontend
     public partial class MainWindow : Window
     {
         public static MainWindow Instance;
+        public static BackendAdapter Adapter = new BackendAdapter();
         public MainWindow()
         {
             InitializeComponent();

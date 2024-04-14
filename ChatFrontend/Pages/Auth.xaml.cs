@@ -1,8 +1,12 @@
-﻿using ChatFrontend.FormBuilder;
+﻿using ChatFrontend.Classes;
+using ChatFrontend.FormBuilder;
+using Newtonsoft.Json;
+using System;
+using System.Net.Http;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace ChatFrontend.Pages
 {
@@ -13,6 +17,7 @@ namespace ChatFrontend.Pages
     {
         InputField login;
         PasswordField password;
+        TextBox commonFormError;
         public Auth(string login = null)
         {
             InitializeComponent();
@@ -27,6 +32,7 @@ namespace ChatFrontend.Pages
             registerForm.AddHeader("Log in", new Thickness(0, 0, 0, 20));
             login = registerForm.AddInputField("login");
             password = registerForm.AddPasswordInputField("password");
+            commonFormError = registerForm.BuildCommonErrorField();
 
             form.Children.Insert(0, registerForm.Build());
         }
@@ -44,19 +50,65 @@ namespace ChatFrontend.Pages
             window.KeyDown += Window_KeyDown;
         }
 
-        private void LogIn_Click(object sender, RoutedEventArgs e)
+        private async void LogIn_Click(object sender, RoutedEventArgs e)
         {
             login.ClearError();
             password.ClearError();
+            commonFormError.Text = "";
+
+            bool isErrors = false;
 
             if (string.IsNullOrEmpty(login.Value))
-                login.SetError("Login cannot be empty!");
+            {
+                login.SetError("Required field");
+                isErrors = true;
+            }
             if (string.IsNullOrEmpty(password.Value))
-                password.SetError("Password cannot be empty!");
+            {
+                password.SetError("Required field");
+                isErrors = true;
+            }
 
-            MessageBox.Show("Click counted!");
-            login.SetError("- Some very very long error that cannot be shown in window\n- overflow overflow\n- overflow overflow overflow overflow overflow");
-            password.SetError("- Some very very long error that cannot be shown in window\n- overflow overflow\n- overflow overflow overflow overflow overflow");
+            if (isErrors) return;
+
+            LogInButton.IsEnabled = false;
+
+            var res = await MainWindow.Adapter.GetAuth(login.Value, password.Value);
+            if (!res.IsSuccessStatusCode)
+            {
+                int statusCode = Convert.ToInt32(res.StatusCode);
+                if (statusCode == 422)
+                {
+                    var json = await res.Content.ReadAsStringAsync();
+                    UnprocessableEntity error = JsonConvert.DeserializeObject<UnprocessableEntity>(json);
+
+                    StringBuilder errorMessage = new StringBuilder();
+                    foreach (var detail in error.Detail)
+                    {
+                        errorMessage.AppendLine($"{detail.Loc[1]} | {detail.Msg}");
+                    }
+                    commonFormError.Text = errorMessage.ToString();
+                }
+                else if (statusCode >= 400 && statusCode < 500)
+                {
+                    var json = await res.Content.ReadAsStringAsync();
+
+                    ErrorResponse error = JsonConvert.DeserializeObject<ErrorResponse>(json);
+
+                    login.SetError(error.Detail);
+                    password.SetError(error.Detail);
+                }
+                else if (statusCode >= 500 && statusCode < 600)
+                {
+                    commonFormError.Text = "Sever Error";
+                }
+            }
+            else
+            {
+                MainWindow.Instance.OpenPage(new MessangerPage());
+            }
+
+            LogInButton.IsEnabled = true;
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)

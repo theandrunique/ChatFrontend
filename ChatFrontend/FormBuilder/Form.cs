@@ -31,6 +31,8 @@ namespace ChatFrontend.FormBuilder
         double defaultFontSize = 18;
         double defaultCornerRadius = 5;
 
+        private SolidColorBrush errorBrush = new SolidColorBrush(Color.FromRgb(239, 49, 36));
+
         private StackPanel stackPanelForm = new StackPanel();
         public Form() { }
         public void AddHeader(string headerText,
@@ -88,6 +90,30 @@ namespace ChatFrontend.FormBuilder
             field.BuildErrorField(defaultMaxWidth);
             stackPanelForm.Children.Add(field.Build());
             return field;
+        }
+        public TextBox BuildCommonErrorField()
+        {
+            Grid errorField = new Grid();
+
+            Border errorBorder = new Border();
+            errorBorder.MaxWidth = defaultMaxWidth;
+
+            TextBox errorTextBox = new TextBox();
+
+            errorTextBox.Foreground = errorBrush;
+            errorTextBox.Background = Brushes.Transparent;
+            errorTextBox.BorderThickness = new Thickness(0);
+            errorTextBox.IsReadOnly = true;
+            errorTextBox.TextWrapping = TextWrapping.WrapWithOverflow;
+            errorTextBox.Focusable = false;
+
+            errorBorder.Child = errorTextBox;
+
+            errorField.Children.Add(errorBorder);
+
+            stackPanelForm.Children.Add(errorField);
+
+            return errorTextBox;
         }
         public StackPanel Build() { return stackPanelForm; }
     }

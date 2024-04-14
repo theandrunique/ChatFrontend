@@ -13,7 +13,7 @@ namespace ChatFrontend.Classes
 {
     public class BackendAdapter
     {
-        public static string BaseUrl = "http://localhost:8000/";
+        public static string BaseUrl = "http://localhost:8001/";
         private HttpClient client;
         private string AuthHeader = null;
         public BackendAdapter()
@@ -29,7 +29,7 @@ namespace ChatFrontend.Classes
                 password = password,
             };
             var content = new StringContent(
-                Newtonsoft.Json.JsonConvert.SerializeObject(json), 
+                JsonConvert.SerializeObject(json), 
                 Encoding.UTF8, 
                 "application/json"
             );
@@ -44,7 +44,7 @@ namespace ChatFrontend.Classes
                 password = password,
             };
             var content = new StringContent(
-                Newtonsoft.Json.JsonConvert.SerializeObject(json),
+                JsonConvert.SerializeObject(json),
                 Encoding.UTF8,
                 "application/json"
             );
@@ -82,6 +82,19 @@ namespace ChatFrontend.Classes
         public void AddAuthHeader(string token)
         {
             AuthHeader = $"Bearer {token}";
+        }
+        public async Task<HttpResponseMessage> ConfirmElailSend(string email)
+        {
+            var json = new
+            {
+                email = email,
+            };
+            var content = new StringContent(
+                JsonConvert.SerializeObject(json),
+                Encoding.UTF8,
+                "application/json"
+            );
+            return await client.PostAsync("/emails/verify/", content);
         }
     }
 }

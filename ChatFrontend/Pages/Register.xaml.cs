@@ -122,7 +122,7 @@ namespace ChatFrontend.Pages
                     if (error.Detail.Contains("username"))
                         username.SetError(error.Detail);
                     else if (error.Detail.Contains("email"))
-                        password.SetError(error.Detail);
+                        email.SetError(error.Detail);
                     else
                         commonFormError.Text = error.Detail;
 
@@ -134,9 +134,8 @@ namespace ChatFrontend.Pages
             }
             else
             {
-                MainWindow.Instance.OpenPage(new MessangerPage());
+                MainWindow.Instance.OpenPage(new RegisterSuccess(email.Value));
             }
-
 
             RegisterButton.IsEnabled = true;
         }

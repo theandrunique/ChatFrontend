@@ -91,12 +91,13 @@ namespace ChatFrontend.FormBuilder
             stackPanelForm.Children.Add(field.Build());
             return field;
         }
-        public TextBox BuildCommonErrorField()
+        public TextBox BuildCommonErrorField(int width = 350)
         {
             Grid errorField = new Grid();
 
             Border errorBorder = new Border();
-            errorBorder.MaxWidth = defaultMaxWidth;
+            errorBorder.MaxWidth = width;
+            errorBorder.HorizontalAlignment = HorizontalAlignment.Center;
 
             TextBox errorTextBox = new TextBox();
 

@@ -4,13 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatFrontend.Views.Windows"
+        xmlns:vm="clr-namespace:ChatFrontend.ViewModels.Auth"
         mc:Ignorable="d"
         Title="Chat" 
         Height="700" Width="1200" 
         MinHeight="500" MinWidth="1050" 
         WindowStartupLocation="CenterScreen" 
         Icon="/ChatFrontend;component/Images/icon-black.png">
-    <Grid>
-        <ContentControl Content="{Binding CurrentView}"/>
+    <Window.DataContext>
+        <vm:MainVM/>
+    </Window.DataContext>
+
+    <Grid Background="#18181b">
+        <ContentControl Content="{Binding CurrentPage}"/>
     </Grid>
 </Window>

@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\Auth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +90,9 @@
     <Compile Include="Classes\Exceptions\AuthException.cs" />
     <Compile Include="Classes\Message.cs" />
     <Compile Include="Classes\Responses\AuthResponse.cs" />
+    <Compile Include="Commands\Base\Command.cs" />
+    <Compile Include="Commands\DateTimeToStringConverter.cs" />
+    <Compile Include="Commands\LambdaCommand.cs" />
     <Compile Include="Components\ChatHistory.xaml.cs">
       <DependentUpon>ChatHistory.xaml</DependentUpon>
     </Compile>
@@ -95,12 +102,11 @@
     <Compile Include="Components\MyMessage.xaml.cs">
       <DependentUpon>MyMessage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FormBuilder\Form.cs" />
-    <Compile Include="FormBuilder\InputField.cs" />
-    <Compile Include="FormBuilder\PasswordField.cs" />
+    <Compile Include="Components\PasswordBoxHelper.cs" />
     <Compile Include="ViewModels\Auth\LoginVM.cs" />
     <Compile Include="ViewModels\Auth\MainVM.cs" />
     <Compile Include="ViewModels\Auth\SignUpVM.cs" />
+    <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="Views\Windows\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
     </Compile>
@@ -108,7 +114,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Pages\Auth\Auth.xaml">
+    <Page Include="Views\UserControls\Auth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,11 +122,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Auth\Register.xaml">
+    <Page Include="Views\UserControls\Register.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Auth\RegisterSuccess.xaml">
+    <Page Include="Views\UserControls\RegisterSuccess.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,16 +152,16 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\Pages\Auth\Auth.xaml.cs">
+    <Compile Include="Views\UserControls\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MessangerPage.xaml.cs">
       <DependentUpon>MessangerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Auth\Register.xaml.cs">
+    <Compile Include="Views\UserControls\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Auth\RegisterSuccess.xaml.cs">
+    <Compile Include="Views\UserControls\RegisterSuccess.xaml.cs">
       <DependentUpon>RegisterSuccess.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -213,6 +219,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Views\Pages\Auth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,8 +16,6 @@ namespace ChatFrontend
         {
             InitializeComponent();
             Instance = this;
-
-            OpenPage(new Pages.RegisterSuccess("24w"));
         }
         public void OpenPage(Page page)
         {

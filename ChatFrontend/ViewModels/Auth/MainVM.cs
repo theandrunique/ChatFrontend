@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShopContent.Commands;
+using ShopContent.ViewModels.Base;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ChatFrontend.ViewModels.Auth
 {
-    public class MainVM
+    public class MainVM : ViewModel
     {
-        LoginVM loginVM;
-        SignUpVM signUpVM;
-        Page _currentPage;
+        public LoginVM LoginVM { get; } = new LoginVM();
+        public SignUpVM SignUpVM { get; } = new SignUpVM();
+        UserControl _currentPage;
         public ICommand NavigateToLoginCommand { get; }
         public ICommand NavigateToSignUpCommand { get; }
 
-        public Page CurrentPage
+        public UserControl CurrentPage
         {
             get
             {
@@ -25,11 +22,25 @@ namespace ChatFrontend.ViewModels.Auth
             set
             {
                 _currentPage = value;
+                OnPropertyChanged(nameof(CurrentPage));
             }
         }
         public MainVM()
         {
+            NavigateToLoginCommand = new LambdaCommand(NavigateToLogin);
+            NavigateToSignUpCommand = new LambdaCommand(NavigateToSignUp);
 
+            CurrentPage = new Views.UserControls.Auth();
+        }
+
+        private void NavigateToLogin(object obj)
+        {
+            CurrentPage = new Views.UserControls.Auth();
+        }
+
+        private void NavigateToSignUp(object obj)
+        {
+            CurrentPage = new Views.UserControls.Register();
         }
     }
 }

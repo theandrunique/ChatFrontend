@@ -1,19 +1,14 @@
-﻿using ChatFrontend.Classes.Exceptions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Markup;
 
 namespace ChatFrontend.Classes
 {
     public class BackendAdapter
     {
-        public static string BaseUrl = "http://localhost:8001/";
+        public static string BaseUrl = "http://localhost:8000/";
         private HttpClient client;
         private string AuthHeader = null;
         public BackendAdapter()

@@ -1,15 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ChatFrontend.Classes
 {
     public class Message
     {
-        public string From;
-        public DateTime At;
+        [JsonProperty("text")]
         public string Text;
+        [JsonProperty("from_id")]
+        public string FromId;
+        [JsonProperty("sended_at")]
+        public DateTime SendedAt;
+        [JsonProperty("message_id")]
+        public int Id;
     }
 }

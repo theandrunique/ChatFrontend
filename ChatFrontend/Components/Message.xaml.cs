@@ -20,18 +20,9 @@ namespace ChatFrontend.Components
     /// </summary>
     public partial class Message : UserControl
     {
-        Classes.Message currentMessage;
-        public Message(Classes.Message message)
+        public Message()
         {
             InitializeComponent();
-            currentMessage = message;
-            Load();
-        }
-        void Load()
-        {
-            MessageAt.Text = currentMessage.At.ToLocalTime().ToString();
-            MessageText.Text = currentMessage.Text;
-            MessageFrom.Text = currentMessage.From;
         }
     }
 }

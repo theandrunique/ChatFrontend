@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,11 +73,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControls\Chat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\ChatsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\Auth.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Windows\MainWindow.xaml">
+    <Page Include="Views\Windows\Messenger.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -106,19 +115,24 @@
     <Compile Include="ViewModels\Auth\LoginVM.cs" />
     <Compile Include="ViewModels\Auth\MainVM.cs" />
     <Compile Include="ViewModels\Auth\SignUpVM.cs" />
+    <Compile Include="ViewModels\Base\ErrorsValidation.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
+    <Compile Include="ViewModels\Messenger\MainVM.cs" />
+    <Compile Include="ViewModels\Messenger\ChatVM.cs" />
+    <Compile Include="Views\UserControls\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\ChatsList.xaml.cs">
+      <DependentUpon>ChatsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Views\Windows\Messenger.xaml.cs">
+      <DependentUpon>Messenger.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\UserControls\Auth.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\MessangerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,9 +168,6 @@
   <ItemGroup>
     <Compile Include="Views\UserControls\Auth.xaml.cs">
       <DependentUpon>Auth.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MessangerPage.xaml.cs">
-      <DependentUpon>MessangerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
@@ -220,7 +231,6 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
-    <Folder Include="Views\Pages\Auth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

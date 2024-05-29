@@ -1,4 +1,4 @@
-﻿using ChatFrontend.ViewModels.Base;
+﻿using ChatFrontend.Services.Base;
 using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
 using System.Windows;
@@ -8,6 +8,7 @@ namespace ChatFrontend.ViewModels.Auth
 {
     public class SignUpVM : ViewModel
     {
+        private readonly INavigationService _navigation;
         string _username = "";
         string _email = "";
         string _password = "";
@@ -45,9 +46,16 @@ namespace ChatFrontend.ViewModels.Auth
             }
         }
         public ICommand SignUpCommand { get; }
-        public SignUpVM()
+        public ICommand NavigateToLoginCommand { get; }
+        public SignUpVM(INavigationService navigation)
         {
+            _navigation = navigation;
             SignUpCommand = new LambdaCommand(ExecuteSignUp);
+            NavigateToLoginCommand = new LambdaCommand(NavigateToLogin);
+        }
+        private void NavigateToLogin(object obj)
+        {
+            _navigation.NavigateTo<LoginVM>();
         }
 
         private void ExecuteSignUp(object obj)

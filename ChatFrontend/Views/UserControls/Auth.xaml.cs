@@ -7,7 +7,7 @@ namespace ChatFrontend.Views.UserControls
     /// </summary>
     public partial class Auth : UserControl
     {
-        public Auth(string login = null)
+        public Auth()
         {
             InitializeComponent();
         }

@@ -24,7 +24,7 @@
                 Grid.Row="1">
                 <TextBox
                     Style="{StaticResource InputField}"
-                    Text="{Binding LoginVM.Login}"
+                    Text="{Binding Login}"
                     Width="350"
                     FontSize="20"
                     Tag="login"
@@ -35,7 +35,7 @@
                 <PasswordBox
                     Style="{StaticResource PasswordBoxStyle}"
                     components:PasswordBoxHelper.BindPassword="True"
-                    components:PasswordBoxHelper.BoundPassword="{Binding LoginVM.Password, Mode=TwoWay}"
+                    components:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay}"
                     Width="350"
                     FontSize="20"
                     Tag="password"
@@ -48,7 +48,7 @@
                     Margin="0, 20, 0, 0"
                     Content="Log in"
                     Style="{StaticResource PrimaryButton}"
-                    Command="{Binding LoginVM.LoginCommand}"
+                    Command="{Binding LoginCommand}"
                     Width="350"
                     Height="35"
                     FontSize="20"

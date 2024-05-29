@@ -8,6 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       MinWidth="800" MinHeight="450">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -58,7 +59,7 @@
                     Orientation="Vertical">
                     <TextBox
                         Style="{StaticResource InputField}"
-                        Text="{Binding SignUpVM.Username}"
+                        Text="{Binding Username}"
                         Width="350"
                         FontSize="20"
                         Tag="username"
@@ -69,7 +70,7 @@
 
                     <TextBox
                         Style="{StaticResource InputField}"
-                        Text="{Binding SignUpVM.Email}"
+                        Text="{Binding Email}"
                         Width="350"
                         FontSize="20"
                         Margin="0, 5, 0, 0"
@@ -82,7 +83,7 @@
                     <PasswordBox
                         Style="{StaticResource PasswordBoxStyle}"
                         components:PasswordBoxHelper.BindPassword="True"
-                        components:PasswordBoxHelper.BoundPassword="{Binding SignUpVM.Password, Mode=TwoWay}"
+                        components:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay}"
                         Width="350"
                         FontSize="20"
                         Tag="password"
@@ -95,7 +96,7 @@
                     <PasswordBox
                         Style="{StaticResource PasswordBoxStyle}"
                         components:PasswordBoxHelper.BindPassword="True"
-                        components:PasswordBoxHelper.BoundPassword="{Binding SignUpVM.ConfirmPassword, Mode=TwoWay}"
+                        components:PasswordBoxHelper.BoundPassword="{Binding ConfirmPassword, Mode=TwoWay}"
                         Width="350"
                         FontSize="20"
                         Tag="confirm password"
@@ -108,7 +109,7 @@
                     <Button 
                         Margin="0, 20, 0, 0"
                         Style="{StaticResource PrimaryButton}"
-                        Command="{Binding SignUpVM.SignUpCommand}"
+                        Command="{Binding SignUpCommand}"
                         MaxWidth="350"
                         Height="35"
                         FontSize="20"

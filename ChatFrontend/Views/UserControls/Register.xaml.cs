@@ -16,32 +16,9 @@ namespace ChatFrontend.Views.UserControls
     /// </summary>
     public partial class Register : UserControl
     {
-        //InputField username;
-        //InputField email;
-        //PasswordField password;
-        //PasswordField confirmPassword;
-        //TextBox commonFormError;
-        public Register(string login = null)
+        public Register()
         {
             InitializeComponent();
-            //CreateForm();
-        }
-        //private void CreateForm()
-        //{
-        //    var registerForm = new FormBuilder.Form();
-        //    registerForm.AddHeader("Sign up", new Thickness(0, 0, 0, 20));
-        //    username = registerForm.AddInputField("username");
-        //    email = registerForm.AddInputField("email");
-        //    password = registerForm.AddPasswordInputField("password");
-        //    confirmPassword = registerForm.AddPasswordInputField("confirm password");
-        //    commonFormError = registerForm.BuildCommonErrorField();
-
-        //    form.Children.Insert(0, registerForm.Build());
-        //}
-
-        private void AuthPage_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
 
         //private bool CheckIsFieldsValid()

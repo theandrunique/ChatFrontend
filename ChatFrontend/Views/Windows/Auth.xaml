@@ -11,11 +11,8 @@
         MinHeight="500" MinWidth="1050" 
         WindowStartupLocation="CenterScreen" 
         Icon="/ChatFrontend;component/Images/icon-black.png">
-    <Window.DataContext>
-        <vm:MainVM/>
-    </Window.DataContext>
 
     <Grid Background="#18181b">
-        <ContentControl Content="{Binding CurrentView}"/>
+        <ContentControl Content="{Binding Navigation.CurrentView}"/>
     </Grid>
 </Window>

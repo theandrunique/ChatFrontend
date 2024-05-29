@@ -1,46 +1,25 @@
-﻿using ShopContent.Commands;
+﻿using ChatFrontend.Services.Base;
 using ShopContent.ViewModels.Base;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace ChatFrontend.ViewModels.Auth
 {
     public class MainVM : ViewModel
     {
-        public LoginVM LoginVM { get; } = new LoginVM();
-        public SignUpVM SignUpVM { get; } = new SignUpVM();
-        UserControl _currentView;
-        public ICommand NavigateToLoginCommand { get; }
-        public ICommand NavigateToSignUpCommand { get; }
-
-        public UserControl CurrentView
+        private INavigationService _navigation;
+        public INavigationService Navigation
         {
-            get
-            {
-                return _currentView;
-            }
+            get => _navigation;
             set
             {
-                _currentView = value;
-                OnPropertyChanged(nameof(CurrentView));
+                _navigation = value;
+                OnPropertyChanged(nameof(Navigation));
             }
         }
-        public MainVM()
-        {
-            NavigateToLoginCommand = new LambdaCommand(NavigateToLogin);
-            NavigateToSignUpCommand = new LambdaCommand(NavigateToSignUp);
 
-            CurrentView = new Views.UserControls.Auth();
-        }
-
-        private void NavigateToLogin(object obj)
+        public MainVM(INavigationService navigation)
         {
-            CurrentView = new Views.UserControls.Auth();
-        }
-
-        private void NavigateToSignUp(object obj)
-        {
-            CurrentView = new Views.UserControls.Register();
+            Navigation = navigation;
+            Navigation.NavigateTo<LoginVM>();
         }
     }
 }

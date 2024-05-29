@@ -1,9 +1,10 @@
 ﻿using ChatFrontend.Services.Base;
+using ChatFrontend.ViewModels.Auth;
 using ShopContent.ViewModels.Base;
 
-namespace ChatFrontend.ViewModels.Auth
+namespace ChatFrontend.ViewModels
 {
-    public class MainVM : ViewModel
+    public class MainWindowVM : ViewModel
     {
         private INavigationService _navigation;
         public INavigationService Navigation
@@ -16,7 +17,7 @@ namespace ChatFrontend.ViewModels.Auth
             }
         }
 
-        public MainVM(INavigationService navigation)
+        public MainWindowVM(INavigationService navigation)
         {
             Navigation = navigation;
             Navigation.NavigateTo<LoginVM>();

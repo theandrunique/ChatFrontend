@@ -6,6 +6,7 @@ using ShopContent.ViewModels.Base;
 using System;
 using ChatFrontend.ViewModels.Auth;
 using ChatFrontend.Services.Base;
+using ChatFrontend.ViewModels;
 
 namespace ChatFrontend
 {
@@ -17,18 +18,19 @@ namespace ChatFrontend
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<Auth>(provider => new Auth
+            services.AddSingleton<MainWindow>(provider => new MainWindow
             {
-                DataContext = provider.GetRequiredService<MainVM>()
+                DataContext = provider.GetRequiredService<MainWindowVM>()
             });
+            services.AddSingleton<MainWindowVM>();
 
             services.AddSingleton<AuthService>();
             services.AddSingleton<JsonService>();
             services.AddSingleton<INavigationService, NavigationService>();
 
-            services.AddSingleton<MainVM>();
             services.AddSingleton<SignUpVM>();
             services.AddSingleton<LoginVM>();
+            
 
             services.AddSingleton<ViewModels.Messenger.MainVM>();
 
@@ -40,8 +42,8 @@ namespace ChatFrontend
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var authWindow = _serviceProvider.GetRequiredService<Auth>();
-            authWindow.Show();
+            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
             base.OnStartup(e);
         }
     }

@@ -17,9 +17,9 @@ namespace ChatFrontend.Views.Windows
     /// <summary>
     /// Логика взаимодействия для Auth.xaml
     /// </summary>
-    public partial class Auth : Window
+    public partial class MainWindow : Window
     {
-        public Auth()
+        public MainWindow()
         {
             InitializeComponent();
         }

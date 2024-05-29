@@ -4,7 +4,7 @@ using ShopContent.ViewModels.Base;
 using System.Windows;
 using System.Windows.Input;
 
-namespace ChatFrontend.ViewModels.Auth
+namespace ChatFrontend.ViewModels
 {
     public class SignUpVM : ViewModel
     {

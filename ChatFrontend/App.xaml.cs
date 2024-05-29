@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using ChatFrontend.Views.Windows;
 using ShopContent.ViewModels.Base;
 using System;
-using ChatFrontend.ViewModels.Auth;
 using ChatFrontend.Services.Base;
 using ChatFrontend.ViewModels;
 
@@ -22,18 +21,16 @@ namespace ChatFrontend
             {
                 DataContext = provider.GetRequiredService<MainWindowVM>()
             });
-            services.AddSingleton<MainWindowVM>();
 
             services.AddSingleton<AuthService>();
             services.AddSingleton<JsonService>();
             services.AddSingleton<INavigationService, NavigationService>();
 
+            services.AddSingleton<MainWindowVM>();
             services.AddSingleton<SignUpVM>();
             services.AddSingleton<LoginVM>();
-            
-
-            services.AddSingleton<ViewModels.Messenger.MainVM>();
-
+            services.AddSingleton<ChatVM>();
+            services.AddSingleton<MessengerVM>();
 
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 

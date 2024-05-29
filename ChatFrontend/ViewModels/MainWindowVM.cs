@@ -1,5 +1,4 @@
 ﻿using ChatFrontend.Services.Base;
-using ChatFrontend.ViewModels.Auth;
 using ShopContent.ViewModels.Base;
 
 namespace ChatFrontend.ViewModels

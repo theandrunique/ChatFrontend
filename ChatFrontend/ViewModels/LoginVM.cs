@@ -4,7 +4,7 @@ using ShopContent.ViewModels.Base;
 using System.Windows;
 using System.Windows.Input;
 
-namespace ChatFrontend.ViewModels.Auth
+namespace ChatFrontend.ViewModels
 {
     public class LoginVM : ViewModel
     {
@@ -45,7 +45,7 @@ namespace ChatFrontend.ViewModels.Auth
         {
             MessageBox.Show($"{Login} {Password}");
 
-            _navigation.NavigateTo<Messenger.MainVM>();
+            _navigation.NavigateTo<MessengerVM>();
         }
     }
 }

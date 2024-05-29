@@ -3,7 +3,7 @@ using ShopContent.ViewModels.Base;
 using System.Windows;
 using System.Windows.Input;
 
-namespace ChatFrontend.ViewModels.Messenger
+namespace ChatFrontend.ViewModels
 {
     public class ChatVM : ViewModel
     {

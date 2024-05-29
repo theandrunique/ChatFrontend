@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ChatFrontend.Pages
+namespace ChatFrontend.Views.Pages
 {
     /// <summary>
     /// Логика взаимодействия для RegisterSuccess.xaml

@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace ChatFrontend.Views.UserControls
+namespace ChatFrontend.Views.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Auth.xaml
     /// </summary>
-    public partial class Auth : UserControl
+    public partial class Login : UserControl
     {
-        public Auth()
+        public Login()
         {
             InitializeComponent();
         }

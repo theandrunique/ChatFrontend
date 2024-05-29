@@ -1,22 +1,13 @@
-﻿using ChatFrontend.Classes;
-using Newtonsoft.Json;
-using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Threading;
+﻿using System.Windows.Controls;
 
-namespace ChatFrontend.Views.UserControls
+namespace ChatFrontend.Views.Pages
 {
     /// <summary>
     /// Логика взаимодействия для Register.xaml
     /// </summary>
-    public partial class Register : UserControl
+    public partial class SignUp : UserControl
     {
-        public Register()
+        public SignUp()
         {
             InitializeComponent();
         }

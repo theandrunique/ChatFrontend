@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ChatFrontend.Views.UserControls
+namespace ChatFrontend.Views.Pages
 {
     public partial class Messenger : UserControl
     {

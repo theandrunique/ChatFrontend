@@ -30,6 +30,9 @@ namespace ChatFrontend
             services.AddSingleton<SignUpVM>();
             services.AddSingleton<LoginVM>();
 
+            services.AddSingleton<ViewModels.Messenger.MainVM>();
+
+
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 
             _serviceProvider = services.BuildServiceProvider();

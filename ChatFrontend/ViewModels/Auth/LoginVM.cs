@@ -44,6 +44,8 @@ namespace ChatFrontend.ViewModels.Auth
         private void ExecuteLogin(object obj)
         {
             MessageBox.Show($"{Login} {Password}");
+
+            _navigation.NavigateTo<Messenger.MainVM>();
         }
     }
 }

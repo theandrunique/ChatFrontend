@@ -1,4 +1,5 @@
 ﻿using ShopContent.ViewModels.Base;
+using System.Windows;
 
 namespace ChatFrontend.ViewModels.Messenger
 {
@@ -8,7 +9,7 @@ namespace ChatFrontend.ViewModels.Messenger
 
         public MainVM()
         {
-            
+            MessageBox.Show("IM HERE");
         }
     }
 }

@@ -61,6 +61,7 @@ namespace ChatFrontend.ViewModels
         private void ExecuteSignUp(object obj)
         {
             MessageBox.Show($"{Username} {Email} {Password} {ConfirmPassword}");
+            _navigation.NavigateTo<RegisterSuccessVM>();
         }
     }
 }

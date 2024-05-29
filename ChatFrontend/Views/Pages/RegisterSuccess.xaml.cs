@@ -1,29 +1,16 @@
-﻿using System.Net.Http;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace ChatFrontend.Views.Pages
 {
     /// <summary>
     /// Логика взаимодействия для RegisterSuccess.xaml
     /// </summary>
-    public partial class RegisterSuccess : Page
+    public partial class RegisterSuccess : UserControl
     {
-        public RegisterSuccess(string email)
+        public RegisterSuccess()
         {
             InitializeComponent();
-            //Load();
         }
-        //private void Load()
-        //{
-        //    var form = new FormBuilder.Form();
-        //    commonError = form.BuildCommonErrorField();
-        //    MainStack.Children.Add(form.Build());
-        //}
-        //private void LogIn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MainWindow.Instance.OpenPage(new Auth(email));
-        //}
 
         //private async void EmailConfirmButton_Click(object sender, RoutedEventArgs e)
         //{

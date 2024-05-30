@@ -10,11 +10,14 @@
     <Grid Background="#18181b">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <components:ChatsList Grid.Column="0"/>
+        <components:NavigationMenu Grid.Column="0"/>
 
-        <components:Chat Grid.Column="1"/>
+        <components:ChatsList Grid.Column="1"/>
+
+        <components:Chat Grid.Column="2"/>
     </Grid>
 </UserControl>

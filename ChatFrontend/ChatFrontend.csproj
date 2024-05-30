@@ -9,7 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\back-icon.png" />
+    <None Remove="Images\chat-icon.png" />
+    <None Remove="Images\exit-icon.png" />
+    <None Remove="Images\settings-icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\back-icon.png" />
     <Resource Include="Images\background.jpg" />
+    <Resource Include="Images\chat-icon.png" />
+    <Resource Include="Images\exit-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon.png" />
@@ -34,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\send.png" />
+    <Resource Include="Images\settings-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

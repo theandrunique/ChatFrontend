@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ChatFrontend"
              xmlns:viewModel="clr-namespace:ChatFrontend.ViewModels"
-             xmlns:view="clr-namespace:ChatFrontend.Views.Pages">
+             xmlns:view="clr-namespace:ChatFrontend.Views.Pages"
+             xmlns:viewUserControl="clr-namespace:ChatFrontend.Views.UserControls">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

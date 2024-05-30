@@ -13,6 +13,11 @@ namespace ChatFrontend
     {
         private readonly ServiceProvider _serviceProvider;
 
+        public ServiceProvider ServiceProvider
+        {
+            get => _serviceProvider;
+        }
+
         public App()
         {
             IServiceCollection services = new ServiceCollection();
@@ -32,6 +37,7 @@ namespace ChatFrontend
             services.AddSingleton<ChatVM>();
             services.AddSingleton<MessengerVM>();
             services.AddSingleton<RegisterSuccessVM>();
+            services.AddSingleton<NavigationMenuVM>();
 
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 

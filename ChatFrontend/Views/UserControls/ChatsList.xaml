@@ -14,7 +14,6 @@
         <Grid Grid.Row="0">
             <TextBox
                 Margin="5"
-                Width="250"
                 FontSize="20"
                 Tag="Search"
                 Style="{StaticResource InputField}"

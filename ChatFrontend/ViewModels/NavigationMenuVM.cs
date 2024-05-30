@@ -15,6 +15,7 @@ namespace ChatFrontend.ViewModels
         {
             _navigation = navigation;
             NavigateToLoginCommand = new LambdaCommand((o) => _navigation.NavigateTo<LoginVM>());
+            NavigateToSettingsCommand = new LambdaCommand((o) => _navigation.NavigateTo<SettingsVM>());
             NavigateToMessengerCommand = new LambdaCommand((o) => _navigation.NavigateTo<MessengerVM>());
         }
     }

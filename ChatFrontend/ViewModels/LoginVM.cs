@@ -43,7 +43,7 @@ namespace ChatFrontend.ViewModels
         }
         private void ExecuteLogin(object obj)
         {
-            MessageBox.Show($"{Login} {Password}");
+            //MessageBox.Show($"{Login} {Password}");
 
             _navigation.NavigateTo<MessengerVM>();
         }

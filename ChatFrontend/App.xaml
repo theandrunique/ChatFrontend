@@ -32,6 +32,10 @@
                 <view:RegisterSuccess/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:SettingsVM}">
+                <view:Settings/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

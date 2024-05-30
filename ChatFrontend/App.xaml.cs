@@ -13,11 +13,6 @@ namespace ChatFrontend
     {
         private readonly ServiceProvider _serviceProvider;
 
-        public ServiceProvider ServiceProvider
-        {
-            get => _serviceProvider;
-        }
-
         public App()
         {
             IServiceCollection services = new ServiceCollection();

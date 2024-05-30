@@ -54,7 +54,7 @@
 
         <Grid Grid.Row="1" Margin="15, 5, 15, 5">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding ChatVM.Messages}" HorizontalContentAlignment="Stretch">
+                <ItemsControl ItemsSource="{Binding Messages}" HorizontalContentAlignment="Stretch">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <userControl:Message DataContext="{Binding}"/>
@@ -77,7 +77,7 @@
                 Margin="3">
                 <TextBox
                     Style="{StaticResource InputField}"
-                    Text="{Binding ChatVM.Message}"
+                    Text="{Binding Message}"
                     Width="400"
                     MaxHeight="300"
                     MinHeight="40"
@@ -88,7 +88,7 @@
                     Foreground="White"/>
                 <Button
                     Style="{StaticResource SecondaryButton}"
-                    Command="{Binding ChatVM.SendMessageCommand}"
+                    Command="{Binding SendMessageCommand}"
                     Height="40"
                     Width="40"
                     Padding="10">

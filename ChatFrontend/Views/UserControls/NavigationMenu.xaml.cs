@@ -13,7 +13,6 @@ namespace ChatFrontend.Views.UserControls
         public NavigationMenu()
         {
             InitializeComponent();
-            DataContext = ((App)Application.Current).ServiceProvider.GetRequiredService<NavigationMenuVM>();
         }
     }
 }

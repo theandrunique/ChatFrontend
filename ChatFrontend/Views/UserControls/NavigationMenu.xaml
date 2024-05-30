@@ -10,20 +10,26 @@
             <Button
                 Width="50"
                 Height="50"
-                Command="{Binding NavigateToMessengerCommand}">
+                Margin="5"
+                Command="{Binding NavigateToMessengerCommand}"
+                Style="{StaticResource ImageButton}">
                 <Image Source="/ChatFrontend;component/Images/chat-icon.png"/>
             </Button>
             <Button
                 Width="50"
                 Height="50"
-                Command="{Binding NavigateToLoginCommand}">
-                <Image Source="/ChatFrontend;component/Images/exit-icon.png"/>
+                Margin="5"
+                Command="{Binding NavigateToSettingsCommand}"
+                Style="{StaticResource ImageButton}">
+                <Image Source="/ChatFrontend;component/Images/settings-icon.png"/>
             </Button>
             <Button
                 Width="50"
                 Height="50"
-                Command="{Binding NavigateToSettingsCommand}">
-                <Image Source="/ChatFrontend;component/Images/settings-icon.png"/>
+                Margin="5"
+                Command="{Binding NavigateToLoginCommand}"
+                Style="{StaticResource ImageButton}">
+                <Image Source="/ChatFrontend;component/Images/exit-icon.png"/>
             </Button>
         </StackPanel>
     </Grid>

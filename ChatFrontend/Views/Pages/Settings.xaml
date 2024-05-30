@@ -7,8 +7,12 @@
              xmlns:components="clr-namespace:ChatFrontend.Views.UserControls"
              mc:Ignorable="d">
     <Grid>
-
-        <components:NavigationMenu DataContext="{Binding NavigationMenuVM}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <components:NavigationMenu Grid.Column="0" DataContext="{Binding NavigationMenuVM}"/>
         
     </Grid>
 </UserControl>

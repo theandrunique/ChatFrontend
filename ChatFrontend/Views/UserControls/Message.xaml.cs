@@ -1,9 +1,6 @@
-﻿using ChatFrontend.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ChatFrontend.Components
+namespace ChatFrontend.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для MyMessage.xaml
+    /// Логика взаимодействия для Message.xaml
     /// </summary>
-    public partial class MyMessage : UserControl
+    public partial class Message : UserControl
     {
-        public MyMessage(Classes.Message message)
+        public Message()
         {
             InitializeComponent();
         }

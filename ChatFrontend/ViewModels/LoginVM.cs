@@ -14,7 +14,7 @@ namespace ChatFrontend.ViewModels
         private readonly INavigationService _navigation;
         private readonly IAuthService _authService;
         public ICommand NavigateToSignUpCommand { get; }
-        LogInModel _logInModel = new LogInModel();
+        LogInSchema _logInModel = new LogInSchema();
 
         string _loginError = "";
         string _passwordError = "";
@@ -104,7 +104,7 @@ namespace ChatFrontend.ViewModels
             var context = new ValidationContext(_logInModel) { MemberName = propertyName };
             var results = new List<ValidationResult>();
             bool isValid = Validator.TryValidateProperty(
-                typeof(LogInModel).GetProperty(propertyName).GetValue(_logInModel),
+                typeof(LogInSchema).GetProperty(propertyName).GetValue(_logInModel),
                 context,
                 results
             );
@@ -135,10 +135,10 @@ namespace ChatFrontend.ViewModels
             {
                 switch (error.MemberNames.FirstOrDefault())
                 {
-                    case nameof(LogInModel.Login):
+                    case nameof(LogInSchema.Login):
                         LoginError = error.ErrorMessage;
                         break;
-                    case nameof(LogInModel.Password):
+                    case nameof(LogInSchema.Password):
                         PasswordError = error.ErrorMessage;
                         break;
                 }

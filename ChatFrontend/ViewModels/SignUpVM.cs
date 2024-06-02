@@ -14,12 +14,12 @@ namespace ChatFrontend.ViewModels
         private readonly INavigationService _navigation;
         private readonly IAuthService _authService;
 
-        private SignUpModel _signUpModel = new SignUpModel();
+        private SignUpSchema _signUpModel = new SignUpSchema();
         private string _commonError = "";
         private string _confirmPassword = "";
         private string _confirmPasswordError = "";
 
-        public SignUpModel SignUpModel
+        public SignUpSchema SignUpModel
         {
             get => _signUpModel;
             set
@@ -179,7 +179,7 @@ namespace ChatFrontend.ViewModels
             var context = new ValidationContext(SignUpModel) { MemberName = propertyName };
             var results = new List<ValidationResult>();
             bool isValid = Validator.TryValidateProperty(
-                typeof(SignUpModel).GetProperty(propertyName).GetValue(SignUpModel),
+                typeof(SignUpSchema).GetProperty(propertyName).GetValue(SignUpModel),
                 context,
                 results
             );

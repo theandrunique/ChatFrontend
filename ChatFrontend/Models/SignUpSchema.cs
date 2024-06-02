@@ -2,7 +2,7 @@
 
 namespace ChatFrontend.Models
 {
-    public class SignUpModel
+    public class SignUpSchema
     {
         private const int UsernameMinLength = 3;
         private const int UsernameMaxLength = 32;
@@ -25,7 +25,7 @@ namespace ChatFrontend.Models
         [StringLength(PasswordMaxLength, MinimumLength = PasswordMinLength, ErrorMessage = "Password must be between 8 and 32 characters")]
         [RegularExpression(PasswordPattern, ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character")]
         public string Password { get; set; }
-        public SignUpModel()
+        public SignUpSchema()
         {
             Username = string.Empty;
             Email = string.Empty;

@@ -2,9 +2,10 @@
 
 namespace ChatFrontend.Services.Base
 {
-    interface IAuthService
+    public interface IAuthService
     {
-        Task<string> Login(string login, string password);
+        Task<bool> Login(string login, string password);
         Task<bool> SignUp(string username, string email, string password);
+        Task<string> Token();
     }
 }

@@ -22,7 +22,7 @@ namespace ChatFrontend
                 DataContext = provider.GetRequiredService<MainWindowVM>()
             });
 
-            services.AddSingleton<AuthService>();
+            services.AddSingleton<IAuthService, AuthService>();
             services.AddSingleton<JsonService>();
             services.AddSingleton<INavigationService, NavigationService>();
 

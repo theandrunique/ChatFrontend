@@ -1,5 +1,4 @@
 ﻿using ShopContent.Commands.Base;
-using System.Windows.Input;
 using System;
 
 namespace ShopContent.Commands
@@ -17,11 +16,16 @@ namespace ShopContent.Commands
 
         public override bool CanExecute(object parameter)
         {
-            return _canExecute == null || _canExecute.Invoke(parameter);
+            return true;
         }
 
         public override void Execute(object parameter)
         {
+            if (_canExecute != null && !_canExecute(parameter))
+            {
+                return;
+            }
+
             _execute(parameter);
         }
     }

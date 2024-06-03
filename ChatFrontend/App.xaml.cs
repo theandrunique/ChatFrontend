@@ -6,6 +6,7 @@ using ShopContent.ViewModels.Base;
 using System;
 using ChatFrontend.Services.Base;
 using ChatFrontend.ViewModels;
+using System.Security.Cryptography.Xml;
 
 namespace ChatFrontend
 {
@@ -27,11 +28,12 @@ namespace ChatFrontend
             services.AddSingleton<INavigationService, NavigationService>();
 
             services.AddSingleton<MainWindowVM>();
-            services.AddSingleton<SignUpVM>();
-            services.AddSingleton<LoginVM>();
+            services.AddTransient<SignUpVM>();
+            services.AddTransient<LoginVM>();
             services.AddSingleton<ChatVM>();
+
             services.AddSingleton<MessengerVM>();
-            services.AddSingleton<RegisterSuccessVM>();
+            services.AddTransient<RegisterSuccessVM>();
             services.AddSingleton<NavigationMenuVM>();
             services.AddSingleton<SettingsVM>();
 

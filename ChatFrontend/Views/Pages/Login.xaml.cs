@@ -5,9 +5,9 @@ namespace ChatFrontend.Views.Pages
     /// <summary>
     /// Логика взаимодействия для Auth.xaml
     /// </summary>
-    public partial class Login : UserControl
+    public partial class LogIn : UserControl
     {
-        public Login()
+        public LogIn()
         {
             InitializeComponent();
         }

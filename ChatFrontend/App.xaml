@@ -22,7 +22,7 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:LoginVM}">
-                <view:Login/>
+                <view:LogIn/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:MessengerVM}">

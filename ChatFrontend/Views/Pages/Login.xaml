@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ChatFrontend.Views.Pages.Login"
+﻿<UserControl x:Class="ChatFrontend.Views.Pages.LogIn"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

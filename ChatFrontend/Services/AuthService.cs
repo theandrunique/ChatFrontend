@@ -1,4 +1,5 @@
 ﻿using ChatFrontend.Services.Base;
+using ChatFrontend.Services.Responses;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace ChatFrontend.Services
     public class AuthService : IAuthService
     {
         readonly HttpClient client = new HttpClient();
-        readonly IJsonService converter = new JsonService();
+        readonly JsonService jsonService = new JsonService();
 
         public AuthService()
         {
@@ -59,7 +60,7 @@ namespace ChatFrontend.Services
             var redirectUri = "http://example.com";
             var responseType = "token";
 
-            var requestUri = $"/oauth/authorize?client_id={clientId}&redirect_uri={Uri.EscapeDataString(redirectUri)}&response_type={responseType}";
+            var requestUri = $"/oauth/authorize?client_id={clientId}&redirect_uri={redirectUri}&response_type={responseType}";
 
             var response = await client.PostAsync(requestUri, null);
 
@@ -70,8 +71,8 @@ namespace ChatFrontend.Services
                     throw await Helper.HandleUnprocessableEntity(response);
                 throw await Helper.HandleCommonError(response);
             }
-
-            return await response.Content.ReadAsStringAsync();
+            var token = jsonService.Deserialize<TokenResponse>(await response.Content.ReadAsStringAsync());
+            return token.AccessToken;
         }
     }
 }

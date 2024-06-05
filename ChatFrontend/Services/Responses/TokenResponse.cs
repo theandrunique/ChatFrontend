@@ -6,7 +6,7 @@ namespace ChatFrontend.Services.Responses
     {
         [JsonProperty("user_id")]
         public int UserId;
-        [JsonProperty("token")]
-        public string Token;
+        [JsonProperty("access_token")]
+        public string AccessToken;
     }
 }

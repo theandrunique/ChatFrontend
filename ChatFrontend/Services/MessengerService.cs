@@ -1,9 +1,11 @@
-﻿using ChatFrontend.Services.Base;
+﻿using ChatFrontend.Core;
+using ChatFrontend.Models;
+using ChatFrontend.Services.Base;
 using ChatFrontend.Services.Responses;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WebSocketSharp;
 
 namespace ChatFrontend.Services
 {
@@ -11,54 +13,24 @@ namespace ChatFrontend.Services
     {
         readonly HttpClient client = new HttpClient();
         readonly IJsonService jsonService = new JsonService();
-        WebSocket webSocket;
 
-        public event Action<NewMessageResponse> OnMessageReceived;
-
-        public MessengerService()
+        public MessengerService(AuthenticationState authenticationState)
         {
+            if (authenticationState.IsAuthenticated == false)
+                throw new Exception("Can't use messenger service without authentication");
+
             client.BaseAddress = new Uri(MessengerServiceSettings.BaseUrl);
+            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {authenticationState.AccessToken}");
         }
 
-        public void SetToken(string token)
-        {
-            client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-            InitializeWebSocket(token);
-        }
-
-        public void RemoveToken()
-        {
-            client.DefaultRequestHeaders.Remove("Authorization");
-            if (webSocket != null && webSocket.IsAlive)
-            {
-                webSocket.Close();
-            }
-        }
-
-        private void InitializeWebSocket(string token)
-        {
-            webSocket = new WebSocket($"{MessengerServiceSettings.WebSocketUrl}?access_token={token}");
-
-            webSocket.OnMessage += (sender, e) =>
-            {
-                ReceiveMessage(e.Data);
-            };
-            webSocket.Connect();
-        }
-
-        private void ReceiveMessage(string message)
-        {
-            var newMessage = jsonService.Deserialize<NewMessageResponse>(message);
-            OnMessageReceived?.Invoke(newMessage);
-        }
-
-        public async Task<ChatsResponse> GetChats()
+        public async Task<List<Chat>> GetChats()
         {
             var response = await client.GetAsync("/chats");
             response.EnsureSuccessStatusCode();
 
             var responseContent = await response.Content.ReadAsStringAsync();
-            return jsonService.Deserialize<ChatsResponse>(responseContent);
+            var chatsResponse = jsonService.Deserialize<ChatsResponse>(responseContent);
+            return chatsResponse.Chats;
         }
 
         public async Task<MessagesResponse> GetMessages(string chatId, int count, int offset)

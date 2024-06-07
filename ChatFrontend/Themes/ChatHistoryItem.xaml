@@ -27,8 +27,8 @@
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Top" FontSize="14"/>
-                                <TextBlock Grid.Row="1" Text="{Binding LastMessage.Text}" VerticalAlignment="Top" FontSize="16" MaxWidth="234"/>
+                                <TextBlock Grid.Row="0" Text="{Binding Chat.Name}" FontWeight="Bold" VerticalAlignment="Top" FontSize="14"/>
+                                <TextBlock Grid.Row="1" Text="{Binding Chat.LastMessage.Text}" VerticalAlignment="Top" FontSize="16" MaxWidth="234"/>
                             </Grid>
                         </Grid>
                     </Border>

@@ -1,56 +1,25 @@
-﻿using ShopContent.Commands;
+﻿using ChatFrontend.Models;
 using ShopContent.ViewModels.Base;
-using System;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace ChatFrontend.ViewModels
 {
     public class ChatVM : ViewModel
     {
-        public ICommand SendMessageCommand { get; }
+        private Chat _chat;
 
-        string _message;
-        ObservableCollection<MessageVM> _messages = new ObservableCollection<MessageVM>();
-
-        public string Message
+        public Chat Chat
         {
-            get => _message;
+            get => _chat;
             set
             {
-                _message = value;
-                OnPropertyChanged(nameof(Message));
+                _chat = value;
+                OnPropertyChanged(nameof(Chat));
             }
         }
 
-        public ObservableCollection<MessageVM> Messages
+        public ChatVM(Chat chat)
         {
-            get => _messages;
-            set
-            {
-                _messages = value;
-                OnPropertyChanged(nameof(Messages));
-            }
-        }
-
-        public ChatVM()
-        {
-            SendMessageCommand = new LambdaCommand(ExecuteSendMessage);
-        }
-        bool kek = false;
-        private void ExecuteSendMessage(object obj)
-        {
-            Messages.Add(new MessageVM()
-            {
-                Username = "theandru",
-                MessageContent = Message,
-                Timestamp = DateTime.Now,
-                ImageUrl = "https://avatars.githubusercontent.com/u/127850940?v=4",
-                IsSentByCurrentUser = kek,
-            });
-            kek = !kek;
-            Messages = Messages;
-            Message = string.Empty;
+            _chat = chat;
         }
     }
 }

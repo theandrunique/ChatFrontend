@@ -16,8 +16,112 @@
 
         <components:NavigationMenu Grid.Column="0" DataContext="{Binding NavigationMenuVM}"/>
 
-        <components:ChatsList Grid.Column="1"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <components:Chat Grid.Column="2" DataContext="{Binding ChatVM}"/>
+            <Grid Grid.Row="0">
+                <TextBox
+                    Margin="5"
+                    FontSize="20"
+                    Tag="Search"
+                    Style="{StaticResource InputField}"
+                    Foreground="White"/>
+            </Grid>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="5, 0, 5, 0">
+                <ListView
+                    ItemsSource="{Binding Chats}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemContainerStyle="{StaticResource Chat}"
+                    SelectedItem="{Binding SelectedChat}"/>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0" 
+                Background="#17212b">
+
+                <StackPanel 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Left">
+                    <TextBox 
+                        Text="Very long username"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="18"
+                        VerticalContentAlignment="Center"
+                        FontWeight="Bold"
+                        Foreground="#f5f5f5"
+                        Margin="15, 0, 0, 0"
+                        IsReadOnly="True"/>
+                    <TextBox 
+                        Text="05.05.05 5:55"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="14"
+                        Foreground="#708499"
+                        VerticalContentAlignment="Center"
+                        Margin="15, 0, 0, 0"
+                        IsReadOnly="True"/>
+                </StackPanel>
+                <Border 
+                    HorizontalAlignment="Right"
+                    Margin="0, 0, 15, 0"
+                    BorderThickness="1"
+                    BorderBrush="#1a1a1a"
+                    CornerRadius="70">
+                    <Image Source="/ChatFrontend;component/Images/icon.png"/>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="15, 5, 15, 5">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView
+                        ItemsSource="{Binding Messages}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ItemContainerStyle="{StaticResource Message}"/>
+                </ScrollViewer>
+            </Grid>
+
+                <Grid Grid.Row="2">
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Margin="3">
+                    <TextBox
+                        Style="{StaticResource InputField}"
+                        Text="{Binding MessageInput}"
+                        Width="400"
+                        MaxHeight="300"
+                        MinHeight="40"
+                        FontSize="20"
+                        Tag="Write a message..."
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        Foreground="White"/>
+                    <Button
+                        Style="{StaticResource SecondaryButton}"
+                        Command="{Binding SendMessageCommand}"
+                        Height="40"
+                        Width="40"
+                        Padding="10">
+                        <Image Margin="5" Source="/ChatFrontend;component/Images/send.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
     </Grid>
 </UserControl>

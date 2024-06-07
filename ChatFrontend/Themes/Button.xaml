@@ -55,7 +55,7 @@
 
     <Style TargetType="{x:Type Button}"
            x:Key="SecondaryButton">
-        
+
         <Style.Setters>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Foreground" Value="White"/>
@@ -94,5 +94,4 @@
             </Setter>
         </Style.Setters>
     </Style>
-    
 </ResourceDictionary>

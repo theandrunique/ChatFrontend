@@ -15,6 +15,8 @@
                 <ResourceDictionary Source="Themes/PasswordBox.xaml"/>
                 <ResourceDictionary Source="Themes/LinkButton.xaml"/>
                 <ResourceDictionary Source="Themes/ImageButton.xaml"/>
+                <ResourceDictionary Source="Themes/ChatHistoryItem.xaml"/>
+                <ResourceDictionary Source="Themes/MessageCard.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type viewModel:SignUpVM}">

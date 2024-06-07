@@ -19,7 +19,7 @@ namespace ChatFrontend.ViewModels
         public MainWindowVM(INavigationService navigation)
         {
             Navigation = navigation;
-            Navigation.NavigateTo<LoginVM>();
+            Navigation.NavigateTo<SignUpVM>();
         }
     }
 }

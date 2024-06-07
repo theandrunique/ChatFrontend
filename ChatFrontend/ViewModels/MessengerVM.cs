@@ -1,23 +1,26 @@
 ﻿using ChatFrontend.Models;
+using ChatFrontend.Services.Base;
 using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
 using System.Windows.Input;
 
 namespace ChatFrontend.ViewModels
 {
     public class MessengerVM : ViewModel
     {
-        private ObservableCollection<Chat> _chats = new ObservableCollection<Chat>();
-        private Chat _selectedChat;
+        private readonly IChatService _chatService;
+
+        private ChatVM _selectedChat;
         private string _messageInput;
-        private ObservableCollection<Message> _messages = new ObservableCollection<Message>();
 
         public NavigationMenuVM NavigationMenuVM { get; }
 
-        public Chat SelectedChat
+        public IChatService ChatService
+        {
+            get => _chatService;
+        }
+
+        public ChatVM SelectedChat
         {
             get => _selectedChat;
             set
@@ -25,26 +28,6 @@ namespace ChatFrontend.ViewModels
                 _selectedChat = value;
                 OnPropertyChanged(nameof(SelectedChat));
                 OnChatSelectedChanged();
-            }
-        }
-
-        public ObservableCollection<Chat> Chats
-        {
-            get => _chats;
-            set
-            {
-                _chats = value;
-                OnPropertyChanged(nameof(Chats));
-            }
-        }
-
-        public ObservableCollection<Message> Messages
-        {
-            get => _messages;
-            set
-            {
-                _messages = value;
-                OnPropertyChanged(nameof(Messages));
             }
         }
 
@@ -60,41 +43,12 @@ namespace ChatFrontend.ViewModels
 
         public ICommand SendMessageCommand { get; set; }
 
-        public MessengerVM(NavigationMenuVM navigationMenuVM)
+        public MessengerVM(NavigationMenuVM navigationMenuVM, IChatService chatService)
         {
             NavigationMenuVM = navigationMenuVM;
-            SendMessageCommand = new LambdaCommand(ExecuteSendMessageCommand, CanExecuteSendMessage);
+            _chatService = chatService;
 
-            Chats.Add(new Chat()
-            {
-                Id = "133",
-                Name = "Chat 1",
-                LastMessage = new Message()
-                {
-                    FromId = "133",
-                    Text = "Test message Test Test message Test",
-                },
-            });
-            Chats.Add(new Chat()
-            {
-                Id = "133",
-                Name = "Chat 1",
-                LastMessage = new Message()
-                {
-                    FromId = "133",
-                    Text = "loxz",
-                },
-            });
-            Chats.Add(new Chat()
-            {
-                Id = "133",
-                Name = "Chat 1",
-                LastMessage = new Message()
-                {
-                    FromId = "133",
-                    Text = "kek",
-                },
-            });
+            SendMessageCommand = new LambdaCommand(ExecuteSendMessageCommand, CanExecuteSendMessage);
         }
 
         private bool CanExecuteSendMessage(object arg)
@@ -102,17 +56,21 @@ namespace ChatFrontend.ViewModels
             return !string.IsNullOrWhiteSpace(MessageInput);
         }
 
-        private void ExecuteSendMessageCommand(object obj)
+        private async void ExecuteSendMessageCommand(object obj)
         {
-            MessageBox.Show(MessageInput);
+            if (SelectedChat == null)
+                return;
+
+            await ChatService.SendMessage(MessageInput);
+            MessageInput = string.Empty;
         }
 
         private void OnChatSelectedChanged()
         {
-            Messages = new ObservableCollection<Message>(new List<Message>()
-            {
-                SelectedChat.LastMessage,
-            });
+            if (SelectedChat == null)
+                return;
+
+            ChatService.LoadChat(SelectedChat.Chat.Id);
         }
     }
 }

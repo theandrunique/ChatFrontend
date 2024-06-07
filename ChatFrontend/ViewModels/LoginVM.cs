@@ -1,4 +1,6 @@
-﻿using ChatFrontend.Models;
+﻿using ChatFrontend.Core;
+using ChatFrontend.Models;
+using ChatFrontend.Services;
 using ChatFrontend.Services.Base;
 using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
@@ -11,6 +13,7 @@ namespace ChatFrontend.ViewModels
 {
     public class LoginVM : ViewModel
     {
+        private readonly AuthenticationState _authenticationState;
         private readonly INavigationService _navigation;
         private readonly IAuthService _authService;
         public ICommand NavigateToSignUpCommand { get; }
@@ -68,8 +71,9 @@ namespace ChatFrontend.ViewModels
         }
         public ICommand LoginCommand { get; }
 
-        public LoginVM(INavigationService navigation, IAuthService authService)
+        public LoginVM(INavigationService navigation, IAuthService authService, AuthenticationState authenticationState)
         {
+            _authenticationState = authenticationState;
             _navigation = navigation;
             _authService = authService;
             LoginCommand = new LambdaCommand(ExecuteLogin, CanExecuteLogin);
@@ -91,6 +95,12 @@ namespace ChatFrontend.ViewModels
             try
             {
                 await _authService.Login(Login, Password);
+
+                _authenticationState.IsAuthenticated = true;
+
+                _authenticationState.AccessToken = await _authService.Token();
+
+                
 
                 _navigation.NavigateTo<MessengerVM>();
             }

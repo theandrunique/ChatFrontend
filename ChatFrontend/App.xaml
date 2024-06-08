@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ChatFrontend"
              xmlns:viewModel="clr-namespace:ChatFrontend.ViewModels"
-             xmlns:view="clr-namespace:ChatFrontend.Views.Pages"
-             xmlns:viewUserControl="clr-namespace:ChatFrontend.Views.UserControls">
+             xmlns:view="clr-namespace:ChatFrontend.Views.Pages">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -42,6 +41,10 @@
 
             <DataTemplate DataType="{x:Type viewModel:SearchVM}">
                 <view:SearchUsers/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SessionPageVM}">
+                <view:SessionPage/>
             </DataTemplate>
 
         </ResourceDictionary>

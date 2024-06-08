@@ -29,8 +29,6 @@ namespace ChatFrontend.Core
             AccessToken = accessToken;
             User = user;
             IsAuthenticated = true;
-
-            _navigationService.NavigateTo<MessengerVM>();
         }
 
         public void Logout()
@@ -38,8 +36,6 @@ namespace ChatFrontend.Core
             AccessToken = null;
             User = null;
             IsAuthenticated = false;
-
-            _navigationService.NavigateTo<LoginVM>();
         }
     }
 }

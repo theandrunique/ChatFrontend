@@ -13,8 +13,6 @@ namespace ChatFrontend.ViewModels
         private ChatVM _selectedChat;
         private string _messageInput;
 
-        public NavigationMenuVM NavigationMenuVM { get; }
-
         public IChatService ChatService
         {
             get => _chatService;
@@ -43,9 +41,8 @@ namespace ChatFrontend.ViewModels
 
         public ICommand SendMessageCommand { get; set; }
 
-        public MessengerVM(NavigationMenuVM navigationMenuVM, IChatService chatService)
+        public MessengerVM(IChatService chatService)
         {
-            NavigationMenuVM = navigationMenuVM;
             _chatService = chatService;
 
             SendMessageCommand = new LambdaCommand(ExecuteSendMessageCommand, CanExecuteSendMessage);

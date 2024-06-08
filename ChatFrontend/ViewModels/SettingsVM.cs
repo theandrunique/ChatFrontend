@@ -4,11 +4,9 @@ namespace ChatFrontend.ViewModels
 {
     public class SettingsVM : ViewModel
     {
-        public NavigationMenuVM NavigationMenuVM { get; }
-
-        public SettingsVM(NavigationMenuVM navigationMenuVM)
+        public SettingsVM()
         {
-            NavigationMenuVM = navigationMenuVM;
+
         }
     }
 }

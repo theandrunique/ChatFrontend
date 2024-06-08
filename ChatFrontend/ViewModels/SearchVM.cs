@@ -1,5 +1,4 @@
-﻿using ChatFrontend.Models;
-using ChatFrontend.Services.Base;
+﻿using ChatFrontend.Services.Base;
 using ShopContent.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ namespace ChatFrontend.ViewModels
     public class SearchVM : ViewModel
     {
         private readonly IAuthService _authService;
-        private readonly INavigationService _navigationService;
 
         private string _searchQuery;
         private ObservableCollection<UserCardVM> _searchResults;
@@ -35,12 +33,10 @@ namespace ChatFrontend.ViewModels
                 OnPropertyChanged(nameof(SearchResults));
             }
         }
-        public INavigationService NavigationService { get => _navigationService; }
 
-        public SearchVM(IAuthService authService, INavigationService navigationService)
+        public SearchVM(IAuthService authService)
         {
             _authService = authService;
-            _navigationService = navigationService;
             _searchResults = new ObservableCollection<UserCardVM>();
 
             _searchDelayTimer = new Timer(300);

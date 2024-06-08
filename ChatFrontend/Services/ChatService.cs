@@ -56,7 +56,7 @@ namespace ChatFrontend.Services
                 {
                     Chats[index].Chat = newMessage.Chat;
                 }
-                if (Chats[_currentSelectedChatIndex].Chat.Id == Chats[index].Chat.Id)
+                if (_currentSelectedChatIndex != -1 && Chats[_currentSelectedChatIndex].Chat.Id == Chats[index].Chat.Id)
                     Messages.Add(newMessage.Message);
             });
         }

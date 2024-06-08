@@ -101,7 +101,7 @@ namespace ChatFrontend.ViewModels
 
                 _appState.Login(token, user);
 
-                _navigation.NavigateTo<MessengerVM>();
+                _navigation.NavigateTo<SessionPageVM>();
             }
             catch (ErrorResponse ex)
             {

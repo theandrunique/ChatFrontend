@@ -25,19 +25,16 @@ namespace ChatFrontend
 
             services.AddSingleton<IAuthService, AuthService>();
             services.AddSingleton<IJsonService, JsonService>();
-            services.AddSingleton<IMessengerService, MessengerService>();
             services.AddSingleton<INavigationService, NavigationService>();
-            services.AddTransient<IChatService, ChatService>();
+            services.AddSingleton<ISessionNavigationService, SessionNavigationService>();
+            services.AddTransient<ISessionServiceProvider, SessionServiceProvider>();
 
             services.AddSingleton<MainWindowVM>();
-            services.AddTransient<SignUpVM>();
-            services.AddTransient<LoginVM>();
 
-            services.AddSingleton<MessengerVM>();
+            services.AddTransient<SignUpVM>();
             services.AddTransient<RegisterSuccessVM>();
-            services.AddSingleton<NavigationMenuVM>();
-            services.AddSingleton<SettingsVM>();
-            services.AddSingleton<SearchVM>();
+            services.AddTransient<LoginVM>();
+            services.AddTransient<SessionPageVM>();
 
             services.AddSingleton<AppState>();
 

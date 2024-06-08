@@ -26,7 +26,7 @@ namespace ChatFrontend.Services
 
         private int _currentSelectedChatIndex = -1;
 
-        public ChatService(IMessengerService messengerService, IJsonService jsonService, AuthenticationState authenticationState)
+        public ChatService(IMessengerService messengerService, IJsonService jsonService, AppState authenticationState)
         {
             if (authenticationState.IsAuthenticated == false)
                 throw new Exception("Can't use without authentication");

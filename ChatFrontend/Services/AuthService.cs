@@ -1,4 +1,5 @@
-﻿using ChatFrontend.Services.Base;
+﻿using ChatFrontend.Models;
+using ChatFrontend.Services.Base;
 using ChatFrontend.Services.Responses;
 using System;
 using System.Net.Http;
@@ -15,6 +16,60 @@ namespace ChatFrontend.Services
         {
             client.BaseAddress = new Uri(AuthServiceSettings.BaseUrl);
         }
+
+        public async Task<User> GetMe()
+        {
+            var response = await client.GetAsync("/users/me");
+            int statusCode = Convert.ToInt32(response.StatusCode);
+            if (statusCode >= 400)
+            {
+                if (statusCode == 422)
+                    throw await Helper.HandleUnprocessableEntity(response);
+                throw await Helper.HandleCommonError(response);
+            }
+
+            var user = jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
+            return user;
+        }
+
+        public async Task<User> GetUserById(string id)
+        {
+            var response = await client.GetAsync($"/users/{id}");
+            int statusCode = Convert.ToInt32(response.StatusCode);
+
+            if (statusCode == 404)
+                return null;
+
+            if (statusCode >= 400)
+            {
+                if (statusCode == 422)
+                    throw await Helper.HandleUnprocessableEntity(response);
+                throw await Helper.HandleCommonError(response);
+            }
+
+            var user = jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
+            return user;
+        }
+
+        public async Task<UsersSearchResponse> SearchUsers(string query)
+        {
+            var response = await client.GetAsync($"/users/search?query={query}");
+            int statusCode = Convert.ToInt32(response.StatusCode);
+
+            if (statusCode == 404)
+                return null;
+
+            if (statusCode >= 400)
+            {
+                if (statusCode == 422)
+                    throw await Helper.HandleUnprocessableEntity(response);
+                throw await Helper.HandleCommonError(response);
+            }
+
+            var searchResult = jsonService.Deserialize<UsersSearchResponse>(await response.Content.ReadAsStringAsync());
+            return searchResult;
+        }
+
         public async Task<bool> Login(string login, string password)
         {
             var json = new

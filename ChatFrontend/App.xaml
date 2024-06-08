@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Themes/ImageButton.xaml"/>
                 <ResourceDictionary Source="Themes/ChatHistoryItem.xaml"/>
                 <ResourceDictionary Source="Themes/MessageCard.xaml"/>
+                <ResourceDictionary Source="Themes/UserCard.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type viewModel:SignUpVM}">
@@ -37,6 +38,10 @@
 
             <DataTemplate DataType="{x:Type viewModel:SettingsVM}">
                 <view:Settings/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SearchVM}">
+                <view:SearchUsers/>
             </DataTemplate>
 
         </ResourceDictionary>

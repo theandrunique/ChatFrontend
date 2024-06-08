@@ -37,8 +37,9 @@ namespace ChatFrontend
             services.AddTransient<RegisterSuccessVM>();
             services.AddSingleton<NavigationMenuVM>();
             services.AddSingleton<SettingsVM>();
+            services.AddSingleton<SearchVM>();
 
-            services.AddSingleton<AuthenticationState>();
+            services.AddSingleton<AppState>();
 
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 

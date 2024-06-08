@@ -12,7 +12,7 @@ namespace ChatFrontend.ViewModels
 {
     public class LoginVM : ViewModel
     {
-        private readonly AuthenticationState _authenticationState;
+        private readonly AppState _appState;
         private readonly INavigationService _navigation;
         private readonly IAuthService _authService;
         public ICommand NavigateToSignUpCommand { get; }
@@ -70,9 +70,9 @@ namespace ChatFrontend.ViewModels
         }
         public ICommand LoginCommand { get; }
 
-        public LoginVM(INavigationService navigation, IAuthService authService, AuthenticationState authenticationState)
+        public LoginVM(INavigationService navigation, IAuthService authService, AppState appState)
         {
-            _authenticationState = authenticationState;
+            _appState = appState;
             _navigation = navigation;
             _authService = authService;
             LoginCommand = new LambdaCommand(ExecuteLogin, CanExecuteLogin);
@@ -95,11 +95,11 @@ namespace ChatFrontend.ViewModels
             {
                 await _authService.Login(Login, Password);
 
-                _authenticationState.IsAuthenticated = true;
+                string token = await _authService.Token();
 
-                _authenticationState.AccessToken = await _authService.Token();
+                User user = await _authService.GetMe();
 
-                
+                _appState.Login(token, user);
 
                 _navigation.NavigateTo<MessengerVM>();
             }

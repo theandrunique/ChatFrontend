@@ -15,6 +15,16 @@
                 Style="{StaticResource ImageButton}">
                 <Image Source="/ChatFrontend;component/Images/chat-icon.png"/>
             </Button>
+
+            <Button
+                Width="50"
+                Height="50"
+                Margin="5"
+                Command="{Binding NavigateToSearchCommand}"
+                Style="{StaticResource ImageButton}">
+                <Image Source="/ChatFrontend;component/Images/search-icon.png"/>
+            </Button>
+
             <Button
                 Width="50"
                 Height="50"
@@ -23,6 +33,7 @@
                 Style="{StaticResource ImageButton}">
                 <Image Source="/ChatFrontend;component/Images/settings-icon.png"/>
             </Button>
+            
             <Button
                 Width="50"
                 Height="50"

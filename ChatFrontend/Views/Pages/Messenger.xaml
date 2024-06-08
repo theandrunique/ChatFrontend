@@ -28,7 +28,10 @@
                     Foreground="White"/>
             </Grid>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="5, 0, 5, 0">
+            <ScrollViewer 
+                VerticalScrollBarVisibility="Auto" 
+                HorizontalScrollBarVisibility="Hidden" 
+                Grid.Row="1">
                 <ListView
                     ItemsSource="{Binding ChatService.Chats}"
                     Background="Transparent"
@@ -83,7 +86,9 @@
             </Grid>
 
             <Grid Grid.Row="1" Margin="15, 5, 15, 5">
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer 
+                    VerticalScrollBarVisibility="Auto"
+                    HorizontalScrollBarVisibility="Hidden">
                     <ListView
                         ItemsSource="{Binding ChatService.Messages}"
                         Background="Transparent"

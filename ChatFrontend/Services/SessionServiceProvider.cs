@@ -11,7 +11,7 @@ namespace ChatFrontend.Services
     {
         private readonly ServiceProvider _serviceProvider;
 
-        public SessionServiceProvider(AppState appState, IJsonService jsonService)
+        public SessionServiceProvider(AppState appState, IJsonService jsonService, ISessionNavigationService sessionNavigationService)
         {
             IServiceCollection services = new ServiceCollection();
 
@@ -19,8 +19,9 @@ namespace ChatFrontend.Services
             services.AddSingleton<IAuthService, AuthService>();
             services.AddSingleton<IChatService, ChatService>();
 
-            services.AddSingleton<AppState>(provider => appState);
-            services.AddSingleton<IJsonService>(provider => jsonService);
+            services.AddSingleton<AppState>(appState);
+            services.AddSingleton<IJsonService>(jsonService);
+            services.AddSingleton<ISessionNavigationService>(sessionNavigationService);
 
             services.AddSingleton<MessengerVM>();
             services.AddSingleton<SettingsVM>();

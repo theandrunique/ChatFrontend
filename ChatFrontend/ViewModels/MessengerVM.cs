@@ -1,7 +1,7 @@
-﻿using ChatFrontend.Models;
-using ChatFrontend.Services.Base;
+﻿using ChatFrontend.Services.Base;
 using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
+using System.Linq;
 using System.Windows.Input;
 
 namespace ChatFrontend.ViewModels
@@ -25,7 +25,7 @@ namespace ChatFrontend.ViewModels
             {
                 _selectedChat = value;
                 OnPropertyChanged(nameof(SelectedChat));
-                OnChatSelectedChanged();
+                OnChatSelectedChanged(SelectedChat.Chat.Id);
             }
         }
 
@@ -62,12 +62,21 @@ namespace ChatFrontend.ViewModels
             MessageInput = string.Empty;
         }
 
-        private void OnChatSelectedChanged()
+        private void OnChatSelectedChanged(string chatId)
         {
             if (SelectedChat == null)
                 return;
 
-            ChatService.LoadChat(SelectedChat.Chat.Id);
+            ChatService.LoadChat(chatId);
+        }
+
+        public async void OpenNewChat(string id)
+        {
+            var messages = await ChatService.LoadChat(id);
+
+            var chat = ChatService.Chats.First(c => c.Chat.Id == messages.Chat.Id);
+
+            SelectedChat = chat;
         }
     }
 }

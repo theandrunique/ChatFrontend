@@ -9,6 +9,7 @@ namespace ChatFrontend.ViewModels
     public class SearchVM : ViewModel
     {
         private readonly IAuthService _authService;
+        private readonly ISessionNavigationService _sessionNavigationService;
 
         private string _searchQuery;
         private ObservableCollection<UserCardVM> _searchResults;
@@ -34,9 +35,11 @@ namespace ChatFrontend.ViewModels
             }
         }
 
-        public SearchVM(IAuthService authService)
+        public SearchVM(IAuthService authService, ISessionNavigationService sessionNavigationService)
         {
             _authService = authService;
+            _sessionNavigationService = sessionNavigationService;
+
             _searchResults = new ObservableCollection<UserCardVM>();
 
             _searchDelayTimer = new Timer(300);
@@ -70,7 +73,7 @@ namespace ChatFrontend.ViewModels
                     SearchResults.Clear();
                     foreach (var user in users.Result)
                     {
-                        SearchResults.Add(new UserCardVM(user));
+                        SearchResults.Add(new UserCardVM(user, _sessionNavigationService));
                     }
                 });
             }

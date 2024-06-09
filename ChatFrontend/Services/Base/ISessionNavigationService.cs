@@ -10,7 +10,5 @@ namespace ChatFrontend.Services.Base
         public Func<Type, ViewModel> ViewModelFactory { get; set; }
 
         public void NavigateTo<T>() where T : ViewModel;
-
-        void Logout();
     }
 }

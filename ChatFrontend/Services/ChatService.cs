@@ -15,8 +15,8 @@ namespace ChatFrontend.Services
 {
     public class ChatService : IChatService
     {
-        public ObservableCollection<Message> Messages { get; private set; } = new ObservableCollection<Message>();
-        public ObservableCollection<ChatVM> Chats { get; private set; } = new ObservableCollection<ChatVM>();
+        public ObservableCollection<Message> Messages { get; } = new ObservableCollection<Message>();
+        public ObservableCollection<ChatVM> Chats { get; } = new ObservableCollection<ChatVM>();
         
 
         private readonly IMessengerService _messengerService;
@@ -61,30 +61,42 @@ namespace ChatFrontend.Services
             });
         }
 
-        public async void LoadChat(string chatId)
+        public async Task<MessagesResponse> LoadChat(string chatId)
         {
             MessagesResponse messagesResponse = await _messengerService.GetMessages(chatId, 20, 0);
+            if (chatId != messagesResponse.Chat.Id)
+            {
+                dispatcher.Invoke(() => Chats.Add(new ChatVM(messagesResponse.Chat)));
+            }
 
             dispatcher.Invoke(() =>
             {
                 Messages.Clear();
                 foreach (var chat in messagesResponse.Messages)
                     Messages.Add(chat);
-                _currentSelectedChatIndex = Chats.IndexOf(Chats.First(c => c.Chat.Id == messagesResponse.Chat.Id));
             });
+            _currentSelectedChatIndex = Chats.IndexOf(Chats.First(c => c.Chat.Id == messagesResponse.Chat.Id));
+            return messagesResponse;
         }
 
         public async Task SendMessage(string message)
         {
             var newMessage = await _messengerService.SendMessage(Chats[_currentSelectedChatIndex].Chat.Id, message);
+            dispatcher.Invoke(() =>
+            {
+                Messages.Add(newMessage.Message);
+                var chat = Chats.FirstOrDefault(c => c.Chat.Id == newMessage.Chat.Id);
+                chat.Chat = newMessage.Chat;
+            });
         }
 
-        private async void LoadChats()
+        private async Task LoadChats()
         {
             List<Chat> chatsResponse = await _messengerService.GetChats();
 
             dispatcher.Invoke(() =>
             {
+                Chats.Clear();
                 foreach (var chat in chatsResponse)
                     Chats.Add(new ChatVM(chat));
             });

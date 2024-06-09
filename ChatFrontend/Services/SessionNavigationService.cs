@@ -33,11 +33,5 @@ namespace ChatFrontend.Services
             var viewModel = _viewModelFactory.Invoke(typeof(T));
             CurrentView = viewModel;
         }
-
-        public void Logout()
-        {
-            CurrentView = null;
-            ViewModelFactory = null;
-        }
     }
 }

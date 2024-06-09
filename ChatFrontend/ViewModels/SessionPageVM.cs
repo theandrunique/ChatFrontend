@@ -35,8 +35,6 @@ namespace ChatFrontend.ViewModels
 
         private void ExecuteLogoutCommand(object obj)
         {
-            _sessionNavigation.Logout();
-
             _navigation.NavigateTo<LoginVM>();
         }
     }

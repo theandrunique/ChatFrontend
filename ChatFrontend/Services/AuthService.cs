@@ -11,17 +11,17 @@ namespace ChatFrontend.Services
 {
     public class AuthService : IAuthService
     {
-        readonly HttpClient client = new HttpClient();
-        readonly JsonService jsonService = new JsonService();
+        readonly HttpClient _client = new HttpClient();
+        readonly JsonService _jsonService = new JsonService();
 
         public AuthService()
         {
-            client.BaseAddress = new Uri(AuthServiceSettings.BaseUrl);
+            _client.BaseAddress = new Uri(AuthServiceSettings.BaseUrl);
         }
 
         public async Task<User> GetMe()
         {
-            var response = await client.GetAsync("/users/me");
+            var response = await _client.GetAsync("/users/me");
             int statusCode = Convert.ToInt32(response.StatusCode);
             if (statusCode >= 400)
             {
@@ -30,13 +30,27 @@ namespace ChatFrontend.Services
                 throw await Helper.HandleCommonError(response);
             }
 
-            var user = jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
+            var user = _jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
             return user;
+        }
+
+        public async Task<User> UpdateImageUrl(string url)
+        {
+            var json = new
+            {
+                image_url = url,
+            };
+
+            var response = await _client.PutAsync("/users/me/image_url", Helper.CreateJsonContent(json));
+
+            response.EnsureSuccessStatusCode();
+
+            return _jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
         }
 
         public async Task<User> GetUserById(string id)
         {
-            var response = await client.GetAsync($"/users/{id}");
+            var response = await _client.GetAsync($"/users/{id}");
             int statusCode = Convert.ToInt32(response.StatusCode);
 
             if (statusCode == 404)
@@ -49,13 +63,13 @@ namespace ChatFrontend.Services
                 throw await Helper.HandleCommonError(response);
             }
 
-            var user = jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
+            var user = _jsonService.Deserialize<User>(await response.Content.ReadAsStringAsync());
             return user;
         }
 
         public async Task<UsersSearchResponse> SearchUsers(string query)
         {
-            var response = await client.GetAsync($"/users/search?query={query}");
+            var response = await _client.GetAsync($"/users/search?query={query}");
             int statusCode = Convert.ToInt32(response.StatusCode);
 
             if (statusCode == 404)
@@ -68,7 +82,7 @@ namespace ChatFrontend.Services
                 throw await Helper.HandleCommonError(response);
             }
 
-            var searchResult = jsonService.Deserialize<UsersSearchResponse>(await response.Content.ReadAsStringAsync());
+            var searchResult = _jsonService.Deserialize<UsersSearchResponse>(await response.Content.ReadAsStringAsync());
             return searchResult;
         }
 
@@ -79,7 +93,7 @@ namespace ChatFrontend.Services
                 login = login,
                 password = password,
             };
-            var response = await client.PostAsync("/auth/login", Helper.CreateJsonContent(json));
+            var response = await _client.PostAsync("/auth/login", Helper.CreateJsonContent(json));
             int statusCode = Convert.ToInt32(response.StatusCode);
             if (statusCode >= 400)
             {
@@ -100,7 +114,7 @@ namespace ChatFrontend.Services
                 password = password,
             };
 
-            var response = await client.PostAsync("/auth/signup", Helper.CreateJsonContent(json));
+            var response = await _client.PostAsync("/auth/signup", Helper.CreateJsonContent(json));
             int statusCode = Convert.ToInt32(response.StatusCode);
 
             if (statusCode >= 400)
@@ -120,7 +134,7 @@ namespace ChatFrontend.Services
 
             var requestUri = $"/oauth/authorize?client_id={clientId}&redirect_uri={redirectUri}&response_type={responseType}";
 
-            var response = await client.PostAsync(requestUri, null);
+            var response = await _client.PostAsync(requestUri, null);
 
             int statusCode = Convert.ToInt32(response.StatusCode);
             if (statusCode >= 400)
@@ -129,13 +143,13 @@ namespace ChatFrontend.Services
                     throw await Helper.HandleUnprocessableEntity(response);
                 throw await Helper.HandleCommonError(response);
             }
-            var token = jsonService.Deserialize<TokenResponse>(await response.Content.ReadAsStringAsync());
+            var token = _jsonService.Deserialize<TokenResponse>(await response.Content.ReadAsStringAsync());
             return token.AccessToken;
         }
 
         public async Task<UsersSearchResponse> GetUsers(List<string> userIds)
         {
-            var response = await client.GetAsync($"/users?user_ids={string.Join("&user_ids=", userIds)}");
+            var response = await _client.GetAsync($"/users?user_ids={string.Join("&user_ids=", userIds)}");
             int statusCode = Convert.ToInt32(response.StatusCode);
 
             if (statusCode == 404)
@@ -148,7 +162,7 @@ namespace ChatFrontend.Services
                 throw await Helper.HandleCommonError(response);
             }
 
-            var searchResult = jsonService.Deserialize<UsersSearchResponse>(await response.Content.ReadAsStringAsync());
+            var searchResult = _jsonService.Deserialize<UsersSearchResponse>(await response.Content.ReadAsStringAsync());
             return searchResult;
         }
     }

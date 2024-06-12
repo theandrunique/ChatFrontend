@@ -2,7 +2,6 @@
 using ChatFrontend.Services.Responses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace ChatFrontend.Services.Base
 {
@@ -15,5 +14,6 @@ namespace ChatFrontend.Services.Base
         Task<User> GetUserById(string id);
         Task<UsersSearchResponse> SearchUsers(string query);
         Task<UsersSearchResponse> GetUsers(List<string> userIds);
+        Task<User> UpdateImageUrl(string imageUrl);
     }
 }

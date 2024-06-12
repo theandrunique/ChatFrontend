@@ -18,6 +18,9 @@ namespace ChatFrontend.Models
         [JsonProperty("creator_id")]
         public string CreatorId { get; set; }
 
+        [JsonProperty("image_url")]
+        public string ImageUrl { get; set; }
+
         [JsonProperty("members")]
         public List<string> Members { get; set; }
 

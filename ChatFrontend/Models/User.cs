@@ -13,6 +13,8 @@ namespace ChatFrontend.Models
         public string Email { get; set; }
         [JsonProperty("email_verified")]
         public bool EmailVerified { get; set; }
+        [JsonProperty("image_url")]
+        public string ImageUrl { get; set; }
         [JsonProperty("active")]
         public bool Active { get; set; }
         [JsonProperty("created_at")]

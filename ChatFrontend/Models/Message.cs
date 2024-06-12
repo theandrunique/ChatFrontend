@@ -20,10 +20,5 @@ namespace ChatFrontend.Models
 
         [JsonProperty("attachments")]
         public List<string> Attachments { get; set; }
-
-        public string ImageUrl
-        {
-            get => "https://avatars.githubusercontent.com/u/127850940?s=400&u=52b76119c01837beeac91a9840bf76e00b805296&v=4";
-        }
     }
 }

@@ -1,6 +1,6 @@
-﻿using ChatFrontend.Models;
+﻿using ChatFrontend.Core;
+using ChatFrontend.Models;
 using ChatFrontend.Services.Base;
-using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

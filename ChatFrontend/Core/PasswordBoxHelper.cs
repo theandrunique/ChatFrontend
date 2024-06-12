@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows;
 
-namespace ChatFrontend.Components
+namespace ChatFrontend.Core
 {
     public static class PasswordBoxHelper
     {

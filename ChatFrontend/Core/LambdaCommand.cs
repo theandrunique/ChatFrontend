@@ -1,7 +1,6 @@
-﻿using ShopContent.Commands.Base;
-using System;
+﻿using System;
 
-namespace ShopContent.Commands
+namespace ChatFrontend.Core
 {
     public class LambdaCommand : Command
     {
@@ -25,7 +24,6 @@ namespace ShopContent.Commands
             {
                 return;
             }
-
             _execute(parameter);
         }
     }

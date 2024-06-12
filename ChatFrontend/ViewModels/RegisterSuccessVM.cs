@@ -1,5 +1,5 @@
-﻿using ChatFrontend.Services.Base;
-using ShopContent.Commands;
+﻿using ChatFrontend.Core;
+using ChatFrontend.Services.Base;
 using ShopContent.ViewModels.Base;
 using System;
 using System.Windows.Input;

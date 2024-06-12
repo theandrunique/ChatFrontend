@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
-namespace ShopContent.Commands.Base
+namespace ChatFrontend.Core
 {
     public abstract class Command : ICommand
     {

@@ -1,6 +1,5 @@
 ﻿using ChatFrontend.Models;
 using ChatFrontend.Services.Base;
-using ChatFrontend.ViewModels;
 
 namespace ChatFrontend.Core
 {

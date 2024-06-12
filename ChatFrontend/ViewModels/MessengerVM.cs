@@ -1,7 +1,6 @@
 ﻿using ChatFrontend.Core;
 using ChatFrontend.Models;
 using ChatFrontend.Services.Base;
-using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
 using System.Linq;
 using System.Windows.Input;

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
     <None Remove="Images\back-icon.png" />
     <None Remove="Images\chat-icon.png" />
     <None Remove="Images\exit-icon.png" />
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="appsettings.json" />
     <Resource Include="Images\back-icon.png" />
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\chat-icon.png" />
@@ -34,7 +36,15 @@
   <ItemGroup>
     <Resource Include="Images\loading_button.gif" />
   </ItemGroup>
-  <ItemGroup>
+    <ItemGroup>
+	    <Content Include="appsettings.json">
+		    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	    </Content>
+    </ItemGroup>
+	<ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.3</Version>

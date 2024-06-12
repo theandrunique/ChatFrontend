@@ -28,15 +28,15 @@ namespace ChatFrontend.Services
 
         private int _currentSelectedChatIndex = -1;
 
-        public ChatService(IMessengerService messengerService, IJsonService jsonService, AppState authenticationState, IAuthService authService)
+        public ChatService(IMessengerService messengerService, IJsonService jsonService, AppState appState, IAuthService authService, Settings settings)
         {
-            if (authenticationState.IsAuthenticated == false)
+            if (appState.IsAuthenticated == false)
                 throw new Exception("Can't use without authentication");
 
             _messengerService = messengerService;
             _jsonService = jsonService;
             _authService = authService;
-            _webSocket = new WebSocket($"{MessengerServiceSettings.WebSocketUrl}?access_token={authenticationState.AccessToken}");
+            _webSocket = new WebSocket($"{settings.MessengerWebSocketUrl}?access_token={appState.AccessToken}");
 
             _webSocket.OnMessage += ReceiveMessage;
             _webSocket.Connect();

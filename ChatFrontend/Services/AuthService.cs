@@ -1,4 +1,5 @@
-﻿using ChatFrontend.Models;
+﻿using ChatFrontend.Core;
+using ChatFrontend.Models;
 using ChatFrontend.Services.Base;
 using ChatFrontend.Services.Responses;
 using System;
@@ -14,9 +15,9 @@ namespace ChatFrontend.Services
         readonly HttpClient _client = new HttpClient();
         readonly JsonService _jsonService = new JsonService();
 
-        public AuthService()
+        public AuthService(Settings settings)
         {
-            _client.BaseAddress = new Uri(AuthServiceSettings.BaseUrl);
+            _client.BaseAddress = new Uri(settings.AuthServiceBaseUrl);
         }
 
         public async Task<User> GetMe()

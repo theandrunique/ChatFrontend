@@ -14,12 +14,12 @@ namespace ChatFrontend.Services
         readonly HttpClient client = new HttpClient();
         readonly IJsonService jsonService = new JsonService();
 
-        public MessengerService(AppState authenticationState)
+        public MessengerService(AppState authenticationState, Settings settings)
         {
             if (authenticationState.IsAuthenticated == false)
                 throw new Exception("Can't use messenger service without authentication");
 
-            client.BaseAddress = new Uri(MessengerServiceSettings.BaseUrl);
+            client.BaseAddress = new Uri(settings.MessengerServiceBaseUrl);
             client.DefaultRequestHeaders.Add("Authorization", $"Bearer {authenticationState.AccessToken}");
         }
 

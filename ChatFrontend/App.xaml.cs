@@ -1,6 +1,7 @@
 ﻿using ChatFrontend.Services;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using ChatFrontend.Views.Windows;
 using ShopContent.ViewModels.Base;
 using System;
@@ -17,6 +18,14 @@ namespace ChatFrontend
         public App()
         {
             IServiceCollection services = new ServiceCollection();
+
+            IConfigurationRoot config = new ConfigurationBuilder()
+                 .AddJsonFile("appsettings.json")
+                 .Build();
+
+            Settings settings = config.GetRequiredSection("Settings").Get<Settings>();
+            services.AddSingleton<Settings>(settings);
+
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {

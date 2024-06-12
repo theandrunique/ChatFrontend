@@ -125,7 +125,7 @@
                 </Grid>
             </Grid>
 
-            <Grid Grid.Row="1" Margin="15, 5, 15, 5">
+            <Border Grid.Row="1" Margin="15, 5, 15, 5">
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto"
                     HorizontalScrollBarVisibility="Hidden">
@@ -135,44 +135,82 @@
                         BorderThickness="0"
                         ItemContainerStyle="{StaticResource Message}"/>
                 </ScrollViewer>
-            </Grid>
+            </Border>
 
             <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                
-                <StackPanel 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    Margin="3">
-                    <TextBox
-                        Style="{StaticResource InputField}"
-                        Text="{Binding MessageInput}"
-                        MaxWidth="400"
-                        Width="400"
-                        MinWidth="50"
-                        MaxHeight="300"
-                        MinHeight="40"
-                        FontSize="20"
-                        Tag="Write a message..."
-                        TextWrapping="Wrap"
-                        AcceptsReturn="True"
-                        Foreground="White"/>
-                    <Button
-                        Style="{StaticResource SecondaryButton}"
-                        Command="{Binding SendMessageCommand}"
-                        Height="40"
-                        Width="40"
-                        Padding="10">
-                        <Image Margin="5" Source="/ChatFrontend;component/Images/send.png"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
+                <Grid Grid.Row="0">
+                    <ScrollViewer
+                        VerticalScrollBarVisibility="Disabled"
+                        HorizontalScrollBarVisibility="Auto">
+                        <ListView
+                            ItemsSource="{Binding Files}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            AllowDrop="True"
+                            Drop="ListView_Drop"
+                            ItemContainerStyle="{StaticResource FileItem}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel 
+                        Grid.Column="1"
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Margin="3">
+
+                        <Button
+                            Style="{StaticResource SecondaryButton}"
+                            Command="{Binding AddFileCommand}"
+                            Height="40"
+                            Width="40"
+                            Padding="10">
+                            <Image Margin="5" Source="/ChatFrontend;component/Images/attach-icon.png"/>
+                        </Button>
+
+                        <TextBox
+                            Style="{StaticResource InputField}"
+                            Text="{Binding MessageInput}"
+                            MaxWidth="400"
+                            Width="400"
+                            MinWidth="50"
+                            MaxHeight="300"
+                            MinHeight="40"
+                            FontSize="20"
+                            Tag="Write a message..."
+                            TextWrapping="Wrap"
+                            AcceptsReturn="True"
+                            Foreground="White"/>
+                        <Button
+                            Style="{StaticResource SecondaryButton}"
+                            Command="{Binding SendMessageCommand}"
+                            Height="40"
+                            Width="40"
+                            Padding="10">
+                            <Image Margin="5" Source="/ChatFrontend;component/Images/send.png"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

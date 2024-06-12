@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Themes/ChatHistoryItem.xaml"/>
                 <ResourceDictionary Source="Themes/MessageCard.xaml"/>
                 <ResourceDictionary Source="Themes/UserCard.xaml"/>
+                <ResourceDictionary Source="Themes/FileItem.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <DataTemplate DataType="{x:Type viewModel:SignUpVM}">

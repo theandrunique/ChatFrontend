@@ -13,16 +13,23 @@
                         Background="{TemplateBinding Background}"
                         CornerRadius="15"
                         Margin="0, 0, 0, 3"
-                        MaxWidth="290">
+                        MaxWidth="280">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" VerticalAlignment="Center" Height="50" BorderThickness="1">
-                                <Image Source="/ChatFrontend;component/Images/icon-low.png"/>
-                            </Border>
-                            <Grid Grid.Column="1">
+
+                            <Ellipse 
+                                    Height="50"
+                                    Width="50"
+                                    VerticalAlignment="Top">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Chat.ImageUrl}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Grid.Column="1" Margin="5, 0, 0, 0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="*"/>

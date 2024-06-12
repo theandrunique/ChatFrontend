@@ -17,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -39,6 +40,36 @@
                     ItemContainerStyle="{StaticResource Chat}"
                     SelectedItem="{Binding SelectedChat}"/>
             </ScrollViewer>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Ellipse 
+                    Height="50"
+                    Width="50"
+                    VerticalAlignment="Top"
+                    Margin="5">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding CurrentUser.ImageUrl}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Grid Grid.Column="1">
+                    <TextBox
+                        Text="{Binding CurrentUser.Username}"
+                        Foreground="White"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="18"
+                        VerticalContentAlignment="Center"
+                        Margin="15, 0, 0, 0"
+                        IsReadOnly="True"/>
+                </Grid>
+
+            </Grid>
         </Grid>
 
         <Grid Grid.Column="2">
@@ -56,7 +87,7 @@
                     Orientation="Horizontal" 
                     HorizontalAlignment="Left">
                     <TextBox 
-                        Text="Very long username"
+                        Text="{Binding SelectedChat.Chat.Name}"
                         Background="Transparent"
                         BorderThickness="0"
                         FontSize="18"
@@ -66,7 +97,7 @@
                         Margin="15, 0, 0, 0"
                         IsReadOnly="True"/>
                     <TextBox 
-                        Text="05.05.05 5:55"
+                        Text="{Binding SelectedChat.Chat.LastMessage.Timestamp, StringFormat='HH:mm'}"
                         Background="Transparent"
                         BorderThickness="0"
                         FontSize="14"
@@ -75,14 +106,15 @@
                         Margin="15, 0, 0, 0"
                         IsReadOnly="True"/>
                 </StackPanel>
-                <Border 
-                    HorizontalAlignment="Right"
-                    Margin="0, 0, 15, 0"
-                    BorderThickness="1"
-                    BorderBrush="#1a1a1a"
-                    CornerRadius="70">
-                    <Image Source="/ChatFrontend;component/Images/icon.png"/>
-                </Border>
+
+                <Ellipse 
+                    Height="50"
+                    Width="50"
+                    VerticalAlignment="Top">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding SelectedChat.Chat.ImageUrl}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
             </Grid>
 
             <Grid Grid.Row="1" Margin="15, 5, 15, 5">

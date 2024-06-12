@@ -29,7 +29,7 @@
                                     Width="50"
                                     VerticalAlignment="Top">
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="{Binding ImageUrl}"/>
+                                        <ImageBrush ImageSource="{Binding Sender.ImageUrl}"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
 
@@ -42,7 +42,7 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBox 
                                                 Grid.Column="0" 
-                                                Text="{Binding FromId}" 
+                                                Text="{Binding Sender.Username}" 
                                                 FontWeight="Bold"
                                                 Background="Transparent" 
                                                 IsReadOnly="True"
@@ -53,7 +53,7 @@
                                                 Foreground="#f5f5f5"/>
                                             <TextBox 
                                                 Grid.Column="1" 
-                                                Text="{Binding Timestamp, StringFormat='yyyy-MM-dd HH:mm:ss'}" 
+                                                Text="{Binding Message.Timestamp, StringFormat='yyyy-MM-dd HH:mm:ss'}" 
                                                 FontStyle="Italic"
                                                 Background="Transparent"
                                                 IsReadOnly="True"
@@ -66,7 +66,7 @@
                                     <TextBox 
                                         Grid.Row="1" 
                                         Grid.Column="1" 
-                                        Text="{Binding Text}" 
+                                        Text="{Binding Message.Text}" 
                                         Background="Transparent" 
                                         FontSize="16"
                                         Foreground="#f5f5f5"

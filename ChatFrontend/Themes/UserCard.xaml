@@ -14,6 +14,7 @@
                         Background="{TemplateBinding Background}"
                         CornerRadius="15"
                         Width="500"
+                        Padding="5"
                         Margin="0, 0, 0, 3"
                         MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=ListView}, Path=ActualWidth}">
                         <Grid>
@@ -22,10 +23,17 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
-                            <Border Grid.Column="0" VerticalAlignment="Center" Height="50" BorderThickness="1">
-                                <Image Source="/ChatFrontend;component/Images/icon-low.png"/>
-                            </Border>
-                            <Grid Grid.Column="1">
+
+                            <Ellipse 
+                                Height="50"
+                                Width="50"
+                                VerticalAlignment="Top">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding User.ImageUrl}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Grid Grid.Column="1" Margin="5, 0, 0, 0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="*"/>

@@ -2,6 +2,8 @@
 using ChatFrontend.Services.Base;
 using ChatFrontend.Services.Responses;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -109,6 +111,7 @@ namespace ChatFrontend.Services
             }
             return statusCode == 201;
         }
+
         public async Task<string> Token()
         {
             var clientId = "5353554b-557e-4872-976e-baf669b2c708";
@@ -128,6 +131,25 @@ namespace ChatFrontend.Services
             }
             var token = jsonService.Deserialize<TokenResponse>(await response.Content.ReadAsStringAsync());
             return token.AccessToken;
+        }
+
+        public async Task<UsersSearchResponse> GetUsers(List<string> userIds)
+        {
+            var response = await client.GetAsync($"/users?user_ids={string.Join("&user_ids=", userIds)}");
+            int statusCode = Convert.ToInt32(response.StatusCode);
+
+            if (statusCode == 404)
+                return null;
+
+            if (statusCode >= 400)
+            {
+                if (statusCode == 422)
+                    throw await Helper.HandleUnprocessableEntity(response);
+                throw await Helper.HandleCommonError(response);
+            }
+
+            var searchResult = jsonService.Deserialize<UsersSearchResponse>(await response.Content.ReadAsStringAsync());
+            return searchResult;
         }
     }
 }

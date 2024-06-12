@@ -10,19 +10,25 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Images\attach-icon.png" />
     <None Remove="Images\back-icon.png" />
     <None Remove="Images\chat-icon.png" />
+    <None Remove="Images\close-icon.png" />
     <None Remove="Images\exit-icon.png" />
+    <None Remove="Images\file-icon.png" />
     <None Remove="Images\search-icon.png" />
     <None Remove="Images\settings-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="appsettings.json" />
+    <Resource Include="Images\attach-icon.png" />
     <Resource Include="Images\back-icon.png" />
     <Resource Include="Images\background.jpg" />
     <Resource Include="Images\chat-icon.png" />
+    <Resource Include="Images\close-icon.png" />
     <Resource Include="Images\exit-icon.png" />
+    <Resource Include="Images\file-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\icon.png" />

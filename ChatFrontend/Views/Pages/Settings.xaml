@@ -6,6 +6,36 @@
              xmlns:local="clr-namespace:ChatFrontend.Views.Pages"
              mc:Ignorable="d">
     <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock
+                Foreground="White"
+                Text="{Binding User.Username}" 
+                FontSize="30" />
 
+            <StackPanel Orientation="Horizontal">
+                
+                
+                <Ellipse 
+                    Height="100"
+                    Width="100"
+                    VerticalAlignment="Top">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding User.ImageUrl}"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                
+                <Button
+                    Content="Change Profile Picture"
+                    Width="200"
+                    Height="35"
+                    FontSize="18"
+                    Margin="20, 0, 0, 0"
+                    Style="{StaticResource SecondaryButton}"
+                    Command="{Binding ChangeProfilePictureCommand}" />
+                
+                
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </UserControl>

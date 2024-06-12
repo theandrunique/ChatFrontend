@@ -11,13 +11,14 @@ namespace ChatFrontend.Services
     {
         private readonly ServiceProvider _serviceProvider;
 
-        public SessionServiceProvider(AppState appState, IJsonService jsonService, ISessionNavigationService sessionNavigationService)
+        public SessionServiceProvider(AppState appState, IJsonService jsonService, ISessionNavigationService sessionNavigationService, IAuthService authService)
         {
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<IMessengerService, MessengerService>();
-            services.AddSingleton<IAuthService, AuthService>();
+            services.AddSingleton<IAuthService>(authService);
             services.AddSingleton<IChatService, ChatService>();
+            services.AddSingleton<IStorageService, StorageService>();
 
             services.AddSingleton<AppState>(appState);
             services.AddSingleton<IJsonService>(jsonService);

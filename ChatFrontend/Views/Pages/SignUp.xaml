@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:ChatFrontend.Views.Pages"
       xmlns:core="clr-namespace:ChatFrontend.Core"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      MinWidth="800" MinHeight="450">
+      d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -52,15 +51,14 @@
                         FontSize="14"/>
                 </StackPanel>
             </Grid>
-            
-            <Grid Grid.Row="2">
+
+            <Grid Grid.Row="2" Width="auto" MaxWidth="350" Margin="5, 0, 5, 0">
                 <StackPanel 
                     x:Name="form" 
                     Orientation="Vertical">
                     <TextBox
                         Style="{StaticResource InputField}"
                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                        Width="350"
                         FontSize="20"
                         Tag="username"
                         Foreground="White"/>
@@ -72,7 +70,6 @@
                     <TextBox
                         Style="{StaticResource InputField}"
                         Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}"
-                        Width="350"
                         FontSize="20"
                         Margin="0, 5, 0, 0"
                         Tag="email"
@@ -86,7 +83,6 @@
                         Style="{StaticResource PasswordBoxStyle}"
                         core:PasswordBoxHelper.BindPassword="True"
                         core:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Width="350"
                         FontSize="20"
                         Tag="password"
                         Margin="0, 5, 0, 0"
@@ -100,13 +96,11 @@
                         Style="{StaticResource PasswordBoxStyle}"
                         core:PasswordBoxHelper.BindPassword="True"
                         core:PasswordBoxHelper.BoundPassword="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Width="350"
                         FontSize="20"
                         Tag="confirm password"
                         Margin="0, 5, 0, 0"
                         Foreground="White"/>
                     <TextBlock
-                        Width="340"
                         Text="{Binding ConfirmPasswordError}"
                         Style="{StaticResource Error}"/>
 
@@ -114,13 +108,11 @@
                         Margin="0, 20, 0, 0"
                         Style="{StaticResource PrimaryButton}"
                         Command="{Binding SignUpCommand}"
-                        MaxWidth="350"
                         Height="35"
                         FontSize="20"
                         Content="Sign up"
                         x:Name="RegisterButton"/>
                     <TextBlock
-                        Width="340"
                         Margin="0,0,0,2"
                         TextAlignment="Center"
                         Text="{Binding CommonError}"

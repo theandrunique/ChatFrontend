@@ -41,34 +41,34 @@
                     SelectedItem="{Binding SelectedChat}"/>
             </ScrollViewer>
 
-            <Grid Grid.Row="2" Background="#17212b">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Ellipse 
-                    Height="40"
-                    Width="40"
-                    VerticalAlignment="Top"
-                    Margin="5">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding CurrentUser.ImageUrl}"/>
-                    </Ellipse.Fill>
-                </Ellipse>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <Ellipse 
+                        Height="40"
+                        Width="40"
+                        VerticalAlignment="Top"
+                        Margin="5">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding CurrentUser.ImageUrl}"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
 
-                <Grid Grid.Column="1">
                     <TextBox
                         Text="{Binding CurrentUser.Username}"
                         Foreground="White"
                         Background="Transparent"
+                        VerticalContentAlignment="Center"
                         BorderThickness="0"
                         FontSize="18"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"
-                        Margin="15, 0, 0, 0"
+                        FontWeight="Bold"
                         IsReadOnly="True"/>
-                </Grid>
+
+                </StackPanel>
 
             </Grid>
         </Grid>
@@ -137,15 +137,24 @@
                 </ScrollViewer>
             </Grid>
 
-                <Grid Grid.Row="2">
-                    <StackPanel 
-                        Orientation="Horizontal" 
-                        HorizontalAlignment="Center"
-                        Margin="3">
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel 
+                    Grid.Column="1"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center"
+                    Margin="3">
                     <TextBox
                         Style="{StaticResource InputField}"
                         Text="{Binding MessageInput}"
+                        MaxWidth="400"
                         Width="400"
+                        MinWidth="50"
                         MaxHeight="300"
                         MinHeight="40"
                         FontSize="20"

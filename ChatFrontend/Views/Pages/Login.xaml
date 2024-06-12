@@ -6,8 +6,7 @@
       xmlns:local="clr-namespace:ChatFrontend.Views.Pages"
       xmlns:core="clr-namespace:ChatFrontend.Core"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      MinWidth="800" MinHeight="450">
+      d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -19,31 +18,27 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel 
-                Orientation="Vertical" 
-                Grid.Row="1">
+
+            <StackPanel Width="auto" MaxWidth="350" Grid.Row="1" Margin="5, 0, 5, 0">
+
                 <TextBox
                     Style="{StaticResource InputField}"
                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}"
-                    Width="350"
                     FontSize="20"
                     Tag="login"
                     Foreground="White"/>
                 <TextBlock
-                    Width="340"
                     Text="{Binding LoginError}"
                     Style="{StaticResource Error}"/>
                 <PasswordBox
                     Style="{StaticResource PasswordBoxStyle}"
                     core:PasswordBoxHelper.BindPassword="True"
                     core:PasswordBoxHelper.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Width="350"
                     FontSize="20"
                     Tag="password"
                     Margin="0, 5, 0, 0"
                     Foreground="White"/>
                 <TextBlock
-                    Width="340"
                     Text="{Binding PasswordError}"
                     Style="{StaticResource Error}"/>
                 <Button
@@ -51,17 +46,15 @@
                     Content="Log in"
                     Style="{StaticResource PrimaryButton}"
                     Command="{Binding LoginCommand}"
-                    Width="350"
                     Height="35"
                     FontSize="20"
                     FontWeight="Bold"/>
                 <TextBlock
-                    Width="340"
                     Margin="0,0,0,2"
                     TextAlignment="Center"
                     Text="{Binding CommonError}"
                     Style="{StaticResource Error}"/>
-                <Grid MaxWidth="350">
+                <Grid>
                     <StackPanel 
                         Orientation="Horizontal"
                         VerticalAlignment="Center"

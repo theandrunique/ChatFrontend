@@ -42,12 +42,33 @@ namespace ChatFrontend.Services
             return jsonService.Deserialize<MessagesResponse>(responseContent);
         }
 
+        public async Task<MessagesResponse> GetPrivateMessages(string userId, int count, int offset)
+        {
+            var response = await client.GetAsync($"/users/{userId}/messages?count={count}&offset={offset}");
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return jsonService.Deserialize<MessagesResponse>(responseContent);
+        }
+
         public async Task<NewMessageResponse> SendMessage(string chatId, string message)
         {
             var sendMessageRequest = new { text = message };
             var content = Helper.CreateJsonContent(sendMessageRequest);
 
             var response = await client.PostAsync($"/chats/{chatId}/messages", content);
+            response.EnsureSuccessStatusCode();
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            return jsonService.Deserialize<NewMessageResponse>(responseContent);
+        }
+
+        public async Task<NewMessageResponse> SendPrivateMessage(string userId, string message)
+        {
+            var sendMessageRequest = new { text = message };
+            var content = Helper.CreateJsonContent(sendMessageRequest);
+
+            var response = await client.PostAsync($"/users/{userId}/messages", content);
             response.EnsureSuccessStatusCode();
 
             var responseContent = await response.Content.ReadAsStringAsync();

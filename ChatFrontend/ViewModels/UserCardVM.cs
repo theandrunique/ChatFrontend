@@ -38,7 +38,7 @@ namespace ChatFrontend.ViewModels
         private void ExecuteSendMessage(object obj)
         {
             var messengerViewModel = (MessengerVM)_sessionNavigationService.ViewModelFactory.Invoke(typeof(MessengerVM));
-            messengerViewModel.OpenNewChat(User.Id);
+            messengerViewModel.OpenNewChat(User);
             _sessionNavigationService.NavigateTo<MessengerVM>();
         }
     }

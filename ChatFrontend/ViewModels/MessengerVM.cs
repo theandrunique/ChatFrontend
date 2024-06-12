@@ -1,4 +1,6 @@
-﻿using ChatFrontend.Services.Base;
+﻿using ChatFrontend.Core;
+using ChatFrontend.Models;
+using ChatFrontend.Services.Base;
 using ShopContent.Commands;
 using ShopContent.ViewModels.Base;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace ChatFrontend.ViewModels
 
         private ChatVM _selectedChat;
         private string _messageInput;
+        private User _currentUser;
 
         public IChatService ChatService
         {
@@ -25,7 +28,7 @@ namespace ChatFrontend.ViewModels
             {
                 _selectedChat = value;
                 OnPropertyChanged(nameof(SelectedChat));
-                OnChatSelectedChanged(SelectedChat.Chat.Id);
+                OnChatSelectedChanged();
             }
         }
 
@@ -39,11 +42,22 @@ namespace ChatFrontend.ViewModels
             }
         }
 
+        public User CurrentUser
+        {
+            get => _currentUser;
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged(nameof(CurrentUser));
+            }
+        }
+
         public ICommand SendMessageCommand { get; set; }
 
-        public MessengerVM(IChatService chatService)
+        public MessengerVM(IChatService chatService, AppState appState)
         {
             _chatService = chatService;
+            CurrentUser = appState.User;
 
             SendMessageCommand = new LambdaCommand(ExecuteSendMessageCommand, CanExecuteSendMessage);
         }
@@ -58,25 +72,49 @@ namespace ChatFrontend.ViewModels
             if (SelectedChat == null)
                 return;
 
-            await ChatService.SendMessage(MessageInput);
+            if (SelectedChat.IsNew)
+            {
+                var newChatVM = await ChatService.SendFirstUserMessage(MessageInput, SelectedChat.Chat.Id, SelectedChat.Chat.Type);
+                SelectedChat = newChatVM;
+            }
+            else
+                await ChatService.SendMessage(MessageInput);
+
             MessageInput = string.Empty;
         }
 
-        private void OnChatSelectedChanged(string chatId)
+        private void OnChatSelectedChanged()
         {
             if (SelectedChat == null)
                 return;
 
-            ChatService.LoadChat(chatId);
+            ChatService.LoadChat(SelectedChat.Chat);
         }
 
-        public async void OpenNewChat(string id)
+        public async void OpenNewChat(User user)
         {
-            var messages = await ChatService.LoadChat(id);
+            var existedChat = ChatService.Chats.FirstOrDefault(c => c.Chat.Id == user.Id);
 
-            var chat = ChatService.Chats.First(c => c.Chat.Id == messages.Chat.Id);
-
-            SelectedChat = chat;
+            if (existedChat != null)
+            {
+                SelectedChat = existedChat;
+                await ChatService.LoadChat(SelectedChat.Chat);
+                return;
+            }
+            else
+            {
+                ChatService.OpenNewChat();
+                SelectedChat = new ChatVM(new Models.Chat()
+                {
+                    Id = user.Id,
+                    Name = user.Username,
+                    ImageUrl = user.ImageUrl,
+                    Type = "private",
+                })
+                {
+                    IsNew = true,
+                };
+            }
         }
     }
 }

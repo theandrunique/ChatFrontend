@@ -8,12 +8,16 @@ namespace ChatFrontend.Services.Base
 {
     public interface IChatService
     {
-        ObservableCollection<Message> Messages { get; }
+        ObservableCollection<MessageVM> Messages { get; }
 
         ObservableCollection<ChatVM> Chats { get; }
 
-        Task<MessagesResponse> LoadChat(string chatId);
+        Task<MessagesResponse> LoadChat(Chat chat);
 
         Task SendMessage(string message);
+
+        Task<ChatVM> SendFirstUserMessage(string message, string chatId, string chatType);
+
+        void OpenNewChat();
     }
 }

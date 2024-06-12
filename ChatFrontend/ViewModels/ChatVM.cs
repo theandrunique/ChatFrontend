@@ -17,6 +17,8 @@ namespace ChatFrontend.ViewModels
             }
         }
 
+        public bool IsNew = false;
+
         public ChatVM(Chat chat)
         {
             _chat = chat;

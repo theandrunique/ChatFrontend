@@ -10,7 +10,9 @@ namespace ChatFrontend.Services.Base
         Task<List<Chat>> GetChats();
 
         Task<MessagesResponse> GetMessages(string chatId, int count, int offset);
+        Task<MessagesResponse> GetPrivateMessages(string userId, int count, int offset);
 
         Task<NewMessageResponse> SendMessage(string chatId, string message);
+        Task<NewMessageResponse> SendPrivateMessage(string userId, string message);
     }
 }

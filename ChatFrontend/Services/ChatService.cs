@@ -15,24 +15,27 @@ namespace ChatFrontend.Services
 {
     public class ChatService : IChatService
     {
-        public ObservableCollection<Message> Messages { get; } = new ObservableCollection<Message>();
+        public ObservableCollection<MessageVM> Messages { get; } = new ObservableCollection<MessageVM>();
         public ObservableCollection<ChatVM> Chats { get; } = new ObservableCollection<ChatVM>();
-        
+
+        public List<User> CurrentChatMembers { get; private set; } = new List<User>();
 
         private readonly IMessengerService _messengerService;
         private readonly IJsonService _jsonService;
+        private readonly IAuthService _authService;
         private WebSocket _webSocket;
         private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
 
         private int _currentSelectedChatIndex = -1;
 
-        public ChatService(IMessengerService messengerService, IJsonService jsonService, AppState authenticationState)
+        public ChatService(IMessengerService messengerService, IJsonService jsonService, AppState authenticationState, IAuthService authService)
         {
             if (authenticationState.IsAuthenticated == false)
                 throw new Exception("Can't use without authentication");
 
             _messengerService = messengerService;
             _jsonService = jsonService;
+            _authService = authService;
             _webSocket = new WebSocket($"{MessengerServiceSettings.WebSocketUrl}?access_token={authenticationState.AccessToken}");
 
             _webSocket.OnMessage += ReceiveMessage;
@@ -57,34 +60,81 @@ namespace ChatFrontend.Services
                     Chats[index].Chat = newMessage.Chat;
                 }
                 if (_currentSelectedChatIndex != -1 && Chats[_currentSelectedChatIndex].Chat.Id == Chats[index].Chat.Id)
-                    Messages.Add(newMessage.Message);
+                    Messages.Add(new MessageVM(newMessage.Message, newMessage.Chat, CurrentChatMembers));
             });
         }
 
-        public async Task<MessagesResponse> LoadChat(string chatId)
+        public void OpenNewChat()
         {
-            MessagesResponse messagesResponse = await _messengerService.GetMessages(chatId, 20, 0);
-            if (chatId != messagesResponse.Chat.Id)
-            {
-                dispatcher.Invoke(() => Chats.Add(new ChatVM(messagesResponse.Chat)));
-            }
+            dispatcher.Invoke(() => Messages.Clear());
+            _currentSelectedChatIndex = -1;
+        }
+
+        public async Task<MessagesResponse> LoadChat(Chat chat)
+        {
+            MessagesResponse messagesResponse;
+
+            if (chat.Type == "group")
+                messagesResponse = await _messengerService.GetMessages(chat.Id, 20, 0);
+            else if (chat.Type == "private")
+                messagesResponse = await _messengerService.GetPrivateMessages(chat.Id, 20, 0);
+            else
+                throw new Exception("Unexpected behavior");
+
+            var membersResponse = await _authService.GetUsers(messagesResponse.Chat.Members);
+            CurrentChatMembers = membersResponse.Result;
 
             dispatcher.Invoke(() =>
             {
                 Messages.Clear();
-                foreach (var chat in messagesResponse.Messages)
-                    Messages.Add(chat);
+                foreach (var message in messagesResponse.Messages)
+                    Messages.Add(new MessageVM(message, messagesResponse.Chat, CurrentChatMembers));
             });
             _currentSelectedChatIndex = Chats.IndexOf(Chats.First(c => c.Chat.Id == messagesResponse.Chat.Id));
             return messagesResponse;
         }
 
-        public async Task SendMessage(string message)
+        public async Task<ChatVM> SendFirstUserMessage(string message, string chatId, string chatType)
         {
-            var newMessage = await _messengerService.SendMessage(Chats[_currentSelectedChatIndex].Chat.Id, message);
+            NewMessageResponse newMessage;
+            if (chatType == "group")
+                newMessage = await _messengerService.SendMessage(chatId, message);
+            else if (chatType == "private")
+                newMessage = await _messengerService.SendPrivateMessage(chatId, message);
+            else
+                throw new Exception("Unexpected behavior");
+
+            ChatVM newChatVM = new ChatVM(newMessage.Chat);
+
+            var membersResponse = await _authService.GetUsers(newMessage.Chat.Members);
+            CurrentChatMembers = membersResponse.Result;
+
             dispatcher.Invoke(() =>
             {
-                Messages.Add(newMessage.Message);
+                if (newMessage.Chat.MessageCount == 1)
+                {
+                    dispatcher.Invoke(() => Chats.Add(newChatVM));
+                }
+                Messages.Add(new MessageVM(newMessage.Message, newMessage.Chat, CurrentChatMembers));
+                var chat = Chats.FirstOrDefault(c => c.Chat.Id == newMessage.Chat.Id);
+                chat.Chat = newMessage.Chat;
+            });
+            return newChatVM;
+        }
+
+        public async Task SendMessage(string message)
+        {
+            NewMessageResponse newMessage;
+            if (Chats[_currentSelectedChatIndex].Chat.Type == "group")
+                newMessage = await _messengerService.SendMessage(Chats[_currentSelectedChatIndex].Chat.Id, message);
+            else if (Chats[_currentSelectedChatIndex].Chat.Type == "private")
+                newMessage = await _messengerService.SendPrivateMessage(Chats[_currentSelectedChatIndex].Chat.Id, message);
+            else
+                throw new Exception("Unexpected behavior");
+
+            dispatcher.Invoke(() =>
+            {
+                Messages.Add(new MessageVM(newMessage.Message, newMessage.Chat, CurrentChatMembers));
                 var chat = Chats.FirstOrDefault(c => c.Chat.Id == newMessage.Chat.Id);
                 chat.Chat = newMessage.Chat;
             });

@@ -19,8 +19,11 @@ namespace ChatFrontend.Services
 
             services.AddSingleton<IMessengerService, MessengerService>();
             services.AddSingleton<IAuthService>(authService);
-            services.AddSingleton<IChatService, ChatService>();
+            services.AddSingleton<IWebSocketService, WebSocketService>();
+            services.AddSingleton<IChatsService, ChatsService>();
+            services.AddSingleton<IMessagesService, MessagesService>();
             services.AddSingleton<IStorageService, StorageService>();
+            services.AddSingleton<IUsersService, UsersService>();
 
             services.AddSingleton<AppState>(appState);
             services.AddSingleton<IJsonService>(jsonService);

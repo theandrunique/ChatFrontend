@@ -12,7 +12,7 @@ namespace ChatFrontend.ViewModels
 {
     public class MessengerVM : ViewModel
     {
-        private readonly IChatService _chatService;
+        private readonly IChatsService _chatsService;
 
         private ChatVM _selectedChat;
         private string _messageInput;
@@ -20,9 +20,9 @@ namespace ChatFrontend.ViewModels
 
         public ObservableCollection<FileItem> Files { get; set; } = new ObservableCollection<FileItem>();
 
-        public IChatService ChatService
+        public IChatsService ChatService
         {
-            get => _chatService;
+            get => _chatsService;
         }
 
         public ChatVM SelectedChat
@@ -60,9 +60,9 @@ namespace ChatFrontend.ViewModels
         public ICommand DropCommand { get; set; }
         public ICommand RemoveFileCommand { get; set; }
 
-        public MessengerVM(IChatService chatService, AppState appState)
+        public MessengerVM(IChatsService chatService, AppState appState)
         {
-            _chatService = chatService;
+            _chatsService = chatService;
             CurrentUser = appState.User;
 
             SendMessageCommand = new LambdaCommand(ExecuteSendMessageCommand, CanExecuteSendMessage);
@@ -81,38 +81,31 @@ namespace ChatFrontend.ViewModels
                 return;
 
             if (SelectedChat.IsNew)
-            {
-                var newChatVM = await ChatService.SendFirstUserMessage(MessageInput, SelectedChat.Chat.Id, SelectedChat.Chat.Type);
-                SelectedChat = newChatVM;
-            }
+                await ChatService.SendMessage(MessageInput, SelectedChat.Chat.Id);
             else
                 await ChatService.SendMessage(MessageInput);
 
             MessageInput = string.Empty;
         }
 
-        private void OnChatSelectedChanged()
+        private async void OnChatSelectedChanged()
         {
             if (SelectedChat == null)
                 return;
-
-            ChatService.LoadChat(SelectedChat.Chat);
+            await ChatService.OpenChat(SelectedChat.Chat);
         }
 
-        public async void OpenNewChat(User user)
+        public void OpenChatWith(User user)
         {
             var existedChat = ChatService.Chats.FirstOrDefault(c => c.Chat.Id == user.Id);
 
             if (existedChat != null)
             {
                 SelectedChat = existedChat;
-                await ChatService.LoadChat(SelectedChat.Chat);
-                return;
             }
             else
             {
-                ChatService.OpenNewChat();
-                SelectedChat = new ChatVM(new Models.Chat()
+                SelectedChat = new ChatVM(new Chat()
                 {
                     Id = user.Id,
                     Name = user.Username,

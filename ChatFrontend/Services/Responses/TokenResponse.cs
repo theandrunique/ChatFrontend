@@ -4,9 +4,11 @@ namespace ChatFrontend.Services.Responses
 {
     public class TokenResponse
     {
-        [JsonProperty("user_id")]
-        public int UserId;
+        [JsonProperty("refresh_token")]
+        public string RefreshToken;
         [JsonProperty("access_token")]
         public string AccessToken;
+        [JsonProperty("expires_in")]
+        public int ExpiresIn;
     }
 }

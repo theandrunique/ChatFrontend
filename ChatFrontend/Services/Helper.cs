@@ -33,5 +33,20 @@ namespace ChatFrontend.Services
             ErrorResponse error = converter.Deserialize<ErrorResponse>(json);
             return error;
         }
+        public async static Task<T> HandleResponse<T>(HttpResponseMessage response)
+        {
+            int statusCode = Convert.ToInt32(response.StatusCode);
+            if (statusCode == 404)
+                return default;
+
+            if (statusCode >= 400)
+            {
+                if (statusCode == 422)
+                    throw await Helper.HandleUnprocessableEntity(response);
+                throw await Helper.HandleCommonError(response);
+            }
+
+            return converter.Deserialize<T>(await response.Content.ReadAsStringAsync());
+        }
     }
 }

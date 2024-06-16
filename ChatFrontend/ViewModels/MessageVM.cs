@@ -1,15 +1,12 @@
 ﻿using ChatFrontend.Models;
 using ShopContent.ViewModels.Base;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ChatFrontend.ViewModels
 {
     public class MessageVM : ViewModel
     {
         private Message _message;
-        private Chat _chat;
-        private ICollection<User> _members;
+        private User _sender;
 
         public Message Message
         {
@@ -20,25 +17,20 @@ namespace ChatFrontend.ViewModels
                 OnPropertyChanged(nameof(Message));
             }
         }
-        public Chat Chat
-        {
-            get => _chat;
-            set
-            {
-                _chat = value;
-                OnPropertyChanged(nameof(Chat));
-            }
-        }
         public User Sender
         {
-            get => _members.FirstOrDefault(u => u.Id == _message.FromId);
+            get => _sender;
+            set
+            {
+                _sender = value;
+                OnPropertyChanged(nameof(Sender));
+            }
         }
 
-        public MessageVM(Message message, Chat chat, ICollection<User> members)
+        public MessageVM(Message message, User sender)
         {
             Message = message;
-            Chat = chat;
-            _members = members;
+            _sender = sender;
         }
     }
 }

@@ -8,11 +8,11 @@ namespace ChatFrontend.ViewModels
 {
     public class SearchVM : ViewModel
     {
-        private readonly IAuthService _authService;
+        private readonly IUsersService _usersService;
         private readonly ISessionNavigationService _sessionNavigationService;
 
         private string _searchQuery;
-        private ObservableCollection<UserCardVM> _searchResults;
+        private ObservableCollection<UserCardVM> _searchResults = new ObservableCollection<UserCardVM>();
         private Timer _searchDelayTimer;
 
         public string SearchQuery
@@ -35,12 +35,10 @@ namespace ChatFrontend.ViewModels
             }
         }
 
-        public SearchVM(IAuthService authService, ISessionNavigationService sessionNavigationService)
+        public SearchVM(IUsersService usersService, ISessionNavigationService sessionNavigationService)
         {
-            _authService = authService;
+            _usersService = usersService;
             _sessionNavigationService = sessionNavigationService;
-
-            _searchResults = new ObservableCollection<UserCardVM>();
 
             _searchDelayTimer = new Timer(300);
             _searchDelayTimer.Elapsed += OnSearchDelayTimerElapsed;
@@ -65,7 +63,7 @@ namespace ChatFrontend.ViewModels
                 return;
             }
 
-            var users = await _authService.SearchUsers(SearchQuery);
+            var users = await _usersService.SearchUsers(SearchQuery);
             if (users != null)
             {
                 App.Current.Dispatcher.Invoke(() =>

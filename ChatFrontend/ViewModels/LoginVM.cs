@@ -2,9 +2,11 @@
 using ChatFrontend.Models;
 using ChatFrontend.Services.Base;
 using ShopContent.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ChatFrontend.ViewModels
@@ -94,17 +96,17 @@ namespace ChatFrontend.ViewModels
             {
                 await _authService.Login(Login, Password);
 
-                string token = await _authService.Token();
-
                 User user = await _authService.GetMe();
-
-                _appState.Login(token, user);
-
+                _appState.User = user;
                 _navigation.NavigateTo<SessionPageVM>();
             }
             catch (ErrorResponse ex)
             {
                 CommonError = ex.Detail;
+            }
+            catch (Exception e)
+            {
+                CommonError = e.Message;
             }
         }
         private bool ValidateField(string propertyName)

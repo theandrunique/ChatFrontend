@@ -210,7 +210,8 @@ namespace ChatFrontend.ViewModels
             try
             {
                 var success = await _authService.SignUp(Username, Email, Password);
-                _navigation.NavigateTo<RegisterSuccessVM>();
+                if (success)
+                    _navigation.NavigateTo<RegisterSuccessVM>();
             }
             catch (ErrorResponse ex)
             {
